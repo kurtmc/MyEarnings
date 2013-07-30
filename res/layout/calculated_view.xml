@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dataToDisplay0" android:layout_gravity="left|center_vertical"
+            android:textSize="28dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/dataToDisplay1"
+              android:layout_gravity="left|center_vertical"
+              android:textSize="28dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/dataToDisplay2"
+              android:layout_gravity="left|center_vertical"
+              android:textSize="28dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/dataToDisplay3"
+              android:layout_gravity="left|center_vertical"
+              android:textSize="28dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/dataToDisplay4"
+              android:layout_gravity="left|center_vertical"
+              android:textSize="28dp"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+                  android:orientation="vertical"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/linearLayoutAd"
+                  android:layout_gravity="bottom"
+                  android:gravity="bottom">
+        <com.google.ads.AdView android:id="@+id/adView"
+                               android:layout_width="fill_parent"
+                               android:layout_height="wrap_content"
+                               ads:adUnitId="MY_AD_UNIT_ID"
+                               ads:adSize="BANNER"
+                               ads:loadAdOnCreate="true"
+                               android:layout_gravity="bottom"
+                />
+    </LinearLayout>
+
+
+</LinearLayout>

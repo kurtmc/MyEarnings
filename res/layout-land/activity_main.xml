@@ -14,26 +14,22 @@
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/editTextHoursWorked" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
-            android:layout_marginLeft="17dp" android:layout_marginTop="15dp"
-            android:layout_toLeftOf="@+id/buttonCalculate"/>
+            android:layout_marginLeft="17dp" android:layout_marginTop="15dp"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/calculate"
-            android:id="@+id/buttonCalculate" android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp" android:layout_alignParentRight="true" android:textSize="16dp"/>
+            android:text="Calculate"
+            android:id="@+id/buttonCalculate" android:layout_alignParentBottom="true" android:layout_toRightOf="@+id/editTextHoursWorked"
+            android:layout_marginBottom="15dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/hours_worked"
+            android:text="Amount of hours worked:"
             android:id="@+id/textViewHoursWorked"
             android:layout_alignParentTop="true" android:layout_alignLeft="@+id/editTextHoursWorked"/>
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_settings"
-            android:id="@+id/buttonPreferences" android:layout_alignParentTop="true" android:layout_alignParentRight="true"
-            android:textSize="10dp" android:layout_alignBottom="@+id/editTextHoursWorked"/>
+    <Button style="?android:attr/buttonStyleSmall" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="Preferences" android:id="@+id/buttonPreferences"
+            android:textSize="10dp"
+            android:layout_alignParentTop="true" android:layout_alignParentRight="true"/>
 </RelativeLayout>

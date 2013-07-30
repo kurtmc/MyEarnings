@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- English -->
+<!-- Korean -->
 <resources>
     <string
             name="app_name"
             >Calculate PAYE</string>
     <string
             name="action_settings"
-            >Preferences</string>
+            >환경 설정</string>
     <string
             name="hours_worked"
-            >Amount of hours worked:</string>
+            >시간 근무 :</string>
     <string
             name="calculate"
-            >Calculate</string>
+            >계산</string>
     <string
             name="calculate_activity"
-            >Calculate</string>
+            >계산</string>
     <string
             name ="name"
-            >Name:</string>
+            >이름 :</string>
     <string
             name ="pay_period"
-            >Pay period:</string>
+            >기간 지불 :</string>
     <string
             name ="weekly"
-            >Weekly</string>
+            >주간</string>
     <string
             name ="fortnightly"
-            >Fortnightly</string>
+            >이주일에 한번의</string>
     <string
             name="monthly"
-            >Monthly</string>
+            >매월</string>
     <string
             name ="tax_code"
-            >Tax code:</string>
+            >세금 코드 (tax code):</string>
     <string
             name ="m"
             >M</string>
@@ -48,16 +48,16 @@
             >Kiwi Saver:</string>
     <string
             name ="none"
-            >None</string>
+            >없음</string>
     <string
             name ="sl"
-            >SL (Student Loan)</string>
+            >학자금 대출 (SL)</string>
     <string
             name ="pay_rate"
-            >Hourly pay:</string>
+            >시간 당 지불 :</string>
     <string
             name ="save"
-            >Save</string>
+            >저장</string>
     <string
             name ="gross"
             >Gross : $</string>
@@ -69,7 +69,7 @@
             >NETT : $</string>
     <string
             name ="studentLoadCalc"
-            >Student Loan : $</string>
+            >학자금 대출 (SL) : $</string>
     <string
             name ="kiwi_saver_calc"
             >Kiwi Saver : $</string>
