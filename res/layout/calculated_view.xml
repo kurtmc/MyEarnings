@@ -23,7 +23,7 @@
               android:layout_gravity="left|center_vertical"
               android:textSize="28dp"/>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+              	  xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
                   android:orientation="vertical"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"

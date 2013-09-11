@@ -102,7 +102,7 @@ public class CalculateActivity extends Activity{
 
 
 
-        /**
+        
         // === ADVERTISEMENT ========================================================
         // Create the adView
         adView = new AdView(this, AdSize.BANNER, MY_AD_UNIT_ID);

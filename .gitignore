@@ -31,3 +31,6 @@ proguard/
 .idea/
 
 </pre></body></html>
+
+# Ignore Admob
+GoogleAdMobAdsSdkAndroid-6.4.1/
