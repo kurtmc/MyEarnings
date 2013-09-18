@@ -1,16 +1,32 @@
 package com.mcalpinedevelopment.calculatepay;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import android.app.Activity;
+
+
 /**
  * Created by kurt on 20/05/13.
  */
-public class Calculator {
+public class Calculator{
+	
+	// Activity that created Calculator
+	Activity _activity;
+	
+	// Filename constant
+	private final String FILENAME = "preferences.txt";
 	
 	// Fields to store values
-	double _hours;
-	double _rate;
-	String _paytype;
+	private double _hours;
+	private double _rate;
+	private String _paytype;
 	
-	public Calculator(String message) {
+	public Calculator(String message, Activity activity) {
+		// Get the activity so a file can be opened
+		_activity = activity;
+		
 		String payInfo = message; //.split(" ");
         try {
             _hours = Double.parseDouble(payInfo);
@@ -29,9 +45,31 @@ public class Calculator {
 		return _rate;
 	}
 	public double hours() {
-		return _rate;
+		return _hours;
 	}
-	public double paytype() {
-		return _rate;
+	public String paytype() {
+		return _paytype;
 	}
+	
+	private String readPreferences() {
+        try {
+
+            StringBuilder fileContent = new StringBuilder();
+            FileInputStream fis = _activity.openFileInput(FILENAME);
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) != -1) {
+                fileContent.append(new String(buffer));
+            }
+            fis.close();
+
+            return fileContent.toString();
+
+        } catch (FileNotFoundException e) {
+            return "Enter Name,Weekly,false,M,None,0.0";
+        } catch (IOException e) {
+            return "Enter Name,Weekly,false,M,None,0.0";
+        }
+    }
 }
