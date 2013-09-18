@@ -151,7 +151,8 @@ public class CalculateActivity extends Activity{
             FileInputStream fis = openFileInput(FILENAME);
             
             byte[] buffer = new byte[1024];
-            int length;
+            @SuppressWarnings("unused")
+			int length;
             while ((length = fis.read(buffer)) != -1) {
                 fileContent.append(new String(buffer));
             }
@@ -191,12 +192,11 @@ public class CalculateActivity extends Activity{
     }
     */
 
+    /** ##################### Not technically used, perhaps implement later
     private double calcPaye() {
-
         // Declare some values
         double total = 0;
         double annualGross = 0;
-
         //Estimate annual income for hourly paid employees, and set annual income for salaried employees
         if (_paytype.equals("Monthly")) {
             annualGross = _rate*_hours*12;
@@ -205,7 +205,6 @@ public class CalculateActivity extends Activity{
         } else if (_paytype.equals("Weekly")) {
             annualGross = _rate*_hours*52;
         }
-
         //Go through each tax bracket and calculate the tax and add to total
         while (annualGross != 0){
             if (annualGross <= TAXBRACKET1) {
@@ -221,20 +220,13 @@ public class CalculateActivity extends Activity{
                 total += (annualGross - TAXBRACKET3)*TAXRATE4;
                 annualGross = TAXBRACKET3;
             }
-
         }
-
         //Calculate PAYE correctly
         double earnings = _hours*_rate;
         int earningsInt = (int)earnings;
-
-
-
-
         // Return the tax one week
         return total*1.0/52.0;
-
-    }
+    }*/
 
 
     private double[] computePayslip() {
