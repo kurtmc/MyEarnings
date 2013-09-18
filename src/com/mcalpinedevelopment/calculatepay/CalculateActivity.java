@@ -70,29 +70,10 @@ public class CalculateActivity extends Activity{
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         
-        
-        
-        // ############## Refactoring
-//        String payInfo = message; //.split(" ");
-//        try {
-//            _hours = Double.parseDouble(payInfo);
-//        } catch (NumberFormatException e) {
-//            _hours = 0.0;
-//        }
-//        //_rate = Double.parseDouble(payInfo[1]);
-//        //_paytype = payInfo[2];
-//
-//        String[] preferencesArray = readPreferences().split(",");
-//        _rate = Double.parseDouble(preferencesArray[5]);
-//        _paytype = preferencesArray[1];
-        // ############## Refactoring
-        // REPLACEMENT
         Calculator calculator = new Calculator(message, this);
         _hours = calculator.hours();
         _rate = calculator.rate();
         _paytype = calculator.paytype();
-        // REPLACEMENT
-
 
         // Set the text view as the activity layout
         setContentView(R.layout.calculated_view);

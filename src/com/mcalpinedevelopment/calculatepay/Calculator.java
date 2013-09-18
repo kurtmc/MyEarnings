@@ -12,9 +12,6 @@ import android.app.Activity;
  */
 public class Calculator{
 	
-	// Activity that created Calculator
-	Activity _activity;
-	
 	// Filename constant
 	private final String FILENAME = "preferences.txt";
 	
@@ -23,9 +20,11 @@ public class Calculator{
 	private double _rate;
 	private String _paytype;
 	
+	private FileReader _fileReader;
+	
 	public Calculator(String message, Activity activity) {
-		// Get the activity so a file can be opened
-		_activity = activity;
+		// Instantiate FileReader for later use
+		_fileReader = new FileReader(activity);
 		
 		String payInfo = message; //.split(" ");
         try {
@@ -33,10 +32,8 @@ public class Calculator{
         } catch (NumberFormatException e) {
             _hours = 0.0;
         }
-        //_rate = Double.parseDouble(payInfo[1]);
-        //_paytype = payInfo[2];
 
-        String[] preferencesArray = readPreferences().split(",");
+        String[] preferencesArray = _fileReader.readPreferences().split(",");
         _rate = Double.parseDouble(preferencesArray[5]);
         _paytype = preferencesArray[1];
 	}
@@ -50,26 +47,4 @@ public class Calculator{
 	public String paytype() {
 		return _paytype;
 	}
-	
-	private String readPreferences() {
-        try {
-
-            StringBuilder fileContent = new StringBuilder();
-            FileInputStream fis = _activity.openFileInput(FILENAME);
-
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = fis.read(buffer)) != -1) {
-                fileContent.append(new String(buffer));
-            }
-            fis.close();
-
-            return fileContent.toString();
-
-        } catch (FileNotFoundException e) {
-            return "Enter Name,Weekly,false,M,None,0.0";
-        } catch (IOException e) {
-            return "Enter Name,Weekly,false,M,None,0.0";
-        }
-    }
 }
