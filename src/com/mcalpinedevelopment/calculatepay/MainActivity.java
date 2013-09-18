@@ -95,7 +95,6 @@ public class MainActivity extends Activity {
      * Takes the string for eTHoursWorked and sends it to CalculateActivity */
     public void sendMessageToCalculate(View view) {
         Intent intent = new Intent(this, CalculateActivity.class);
-        String payPeriod = "";
         String message = eTHoursWorked.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
