@@ -20,7 +20,7 @@ public class Calculator{
 	 * message is the String passed from MainActivity it contains a String
 	 * that represents how many hours were worked
 	 * @param activity
-	 * activity is needed for context so that FileReader can be instatiated
+	 * activity is needed for context so that FileReader can be instantiated
 	 */
 	public Calculator(String message, Activity activity) {
 		// Instantiate FileReader for later use
@@ -29,12 +29,24 @@ public class Calculator{
 		String payInfo = message;
         try {
             _hours = Double.parseDouble(payInfo);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e) { // catch if there is wrong formatting, set to 0.0
             _hours = 0.0;
+        } catch (NullPointerException e) { // catch if there is empty string, set to 0.0
+        	_hours = 0.0;
         }
 
         String[] preferencesArray = _fileReader.readPreferences().split(",");
-        _rate = Double.parseDouble(preferencesArray[5]);
+        
+        // Catch exceptions where the String is either incorrectly formatted,
+        // or it is empty
+        try {
+        	_rate = Double.parseDouble(preferencesArray[5]);
+        } catch (NumberFormatException e) {
+        	_rate = 0.0;
+        } catch (NullPointerException e) {
+        	_rate = 0.0;
+        }        
+        
         _paytype = preferencesArray[1];
 	}
 	

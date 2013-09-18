@@ -136,14 +136,22 @@ public class PreferencesActivity extends Activity {
             rBML.setChecked(true);
         }
         if (preferences[4].equals("None")) {
-            rBKSNone.setChecked(true);
+            rBKSNone.setChecked(true);            
         } else {
-
             rBVarKiwiSaver.setChecked(true);
             rBVarKiwiSaver.setText(preferences[4]+" %");
             sBKiwiSaver.setProgress((int)((Double.parseDouble(preferences[4])-1)*100.0/7.0));
         }
-        eTPayRate.setText(preferences[5]);
+        
+        try {
+        	Double.parseDouble(preferences[5]);
+        	eTPayRate.setText(preferences[5]);
+        } catch (NumberFormatException e) {
+        	eTPayRate.setText("0.0");
+        } catch (NullPointerException e) {
+        	eTPayRate.setText("0.0");
+        }
+        
 
         bSave.setOnClickListener(new View.OnClickListener() {
 
@@ -159,38 +167,6 @@ public class PreferencesActivity extends Activity {
 
     private String readText() {   
     	return _fileReader.readPreferences();
-//        try {
-//
-//            StringBuilder fileContent = new StringBuilder();
-//            FileInputStream fis = openFileInput(FILENAME);
-//
-//            byte[] buffer = new byte[1024];
-//            int length;
-//            while ((length = fis.read(buffer)) != -1) {
-//                fileContent.append(new String(buffer));
-//            }
-//            fis.close();
-//
-//            return fileContent.toString();
-//
-//        } catch (FileNotFoundException e) {
-//            return "Enter Name,Weekly,false,M,None,0.0";
-//        } catch (IOException e) {
-//            return "Enter Name,Weekly,false,M,None,0.0";
-//        }
-
-        /*
-        String line = "";
-        InputStream is = getResources().openRawResource(R.raw.preferences);
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader br = new BufferedReader(isr);
-            try {
-                line = br.readLine();
-            } catch (IOException e) {
-
-            }
-        return line;
-        */
     }
 
     private void writePreferences(){

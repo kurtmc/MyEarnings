@@ -158,5 +158,4 @@ public class CalculateActivity extends Activity{
         // Return the tax one week
         return total*1.0/52.0;
     }*/
-
 }
