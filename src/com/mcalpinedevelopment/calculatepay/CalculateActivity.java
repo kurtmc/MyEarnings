@@ -108,41 +108,6 @@ public class CalculateActivity extends Activity{
 
 
     }
-
-    private String readTaxData() {
-        double grossIncome = _rate*_hours;
-        int readFactor;
-        InputStream is;
-        if (_paytype.equals("Weekly")) {
-            is = getResources().openRawResource(R.raw.weeklypaye);
-            readFactor = 1;
-        } else {
-            is = getResources().openRawResource(R.raw.fortnighlypaye);
-            readFactor = 2;
-        }
-
-        String line = "";
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader br = new BufferedReader(isr);
-        String prevLine;
-        if (grossIncome == 0) {
-            line = "0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0,0.0,0,0.0,0,0.0,0";
-
-        } else {
-            for (int i = 0; i < (int)grossIncome/readFactor; i++)
-            try {
-                prevLine = line;
-                line = br.readLine();
-                if (line == null){
-                    line = prevLine;
-                    break;
-                }
-            } catch (IOException e) {
-
-            }
-        }
-        return line;
-    }
     
     // ########### refactoring
     private String readPreferences() {
