@@ -82,14 +82,22 @@ public class CalculateActivity extends Activity{
         tvDataToDisplay2 = (TextView)findViewById(R.id.dataToDisplay2);
         tvDataToDisplay3 = (TextView)findViewById(R.id.dataToDisplay3);
         tvDataToDisplay4 = (TextView)findViewById(R.id.dataToDisplay4);
-        double[] taxData = computePayslip();
-        String[] pay = {getString(R.string.gross) + String.format("%.2f",taxData[0]),getString(R.string.paye) + String.format("%.2f",taxData[1]),getString(R.string.studentLoadCalc) + String.format("%.2f",taxData[2]),getString(R.string.kiwi_saver_calc) + String.format("%.2f",taxData[3]),getString(R.string.nett) + String.format("%.2f",taxData[4])};
-        tvDataToDisplay0.setText(pay[0]);
-        tvDataToDisplay1.setText(pay[1]);
-        tvDataToDisplay2.setText(pay[2]);
-        tvDataToDisplay3.setText(pay[3]);
-        tvDataToDisplay4.setText(pay[4]);
-
+//        double[] taxData = computePayslip();
+//        String[] pay = {getString(R.string.gross) + String.format("%.2f",taxData[0]),getString(R.string.paye) + String.format("%.2f",taxData[1]),getString(R.string.studentLoadCalc) + String.format("%.2f",taxData[2]),getString(R.string.kiwi_saver_calc) + String.format("%.2f",taxData[3]),getString(R.string.nett) + String.format("%.2f",taxData[4])};
+//        tvDataToDisplay0.setText(pay[0]);
+//        tvDataToDisplay1.setText(pay[1]);
+//        tvDataToDisplay2.setText(pay[2]);
+//        tvDataToDisplay3.setText(pay[3]);
+//        tvDataToDisplay4.setText(pay[4]);
+        
+        // Instantiate Employee object
+        Employee employee = new Employee(message, this);
+        
+        tvDataToDisplay0.setText(employee.gross());
+        tvDataToDisplay1.setText(employee.paye());
+        tvDataToDisplay2.setText(employee.studentLoan());
+        tvDataToDisplay3.setText(employee.kiwiSaver());
+        tvDataToDisplay4.setText(employee.nett());
 
 
         
@@ -267,11 +275,7 @@ public class CalculateActivity extends Activity{
         double nett = gross - paye - sL - kS;
         double[] outputTaxData = {gross,paye,sL,kS,nett};
 
-
-
-
         return outputTaxData;
-
     }
 
     //Overriding back button
