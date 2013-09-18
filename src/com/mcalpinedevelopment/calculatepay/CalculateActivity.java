@@ -7,12 +7,10 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.*;
 import com.google.ads.*;
 
 
@@ -44,13 +42,6 @@ public class CalculateActivity extends Activity{
     TextView tvDataToDisplay2;
     TextView tvDataToDisplay3;
     TextView tvDataToDisplay4;
-
-
-    //################### refactoring
-    String FILENAME = "preferences.txt";
-
-
-
 
     //Code inside of this method is executed when it is instantiated
     @SuppressLint("NewApi")
