@@ -17,22 +17,24 @@ public class FileReader {
 	}
 	
 	public String readPreferences() {
-        try {
+		try {
 
             StringBuilder fileContent = new StringBuilder();
             FileInputStream fis = _activity.openFileInput(FILENAME);
 
             byte[] buffer = new byte[1024];
-            int length;
+            @SuppressWarnings("unused")
+			int length;
             while ((length = fis.read(buffer)) != -1) {
                 fileContent.append(new String(buffer));
             }
             fis.close();
 
             return fileContent.toString();
-
+            
+         // Return default values if there is a problem
         } catch (FileNotFoundException e) {
-            return "Enter Name,Weekly,false,M,None,0.0";
+            return "Enter Name,Weekly,false,M,None,0.0"; 
         } catch (IOException e) {
             return "Enter Name,Weekly,false,M,None,0.0";
         }

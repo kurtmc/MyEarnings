@@ -1,9 +1,5 @@
 package com.mcalpinedevelopment.calculatepay;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import android.app.Activity;
 
 
@@ -11,9 +7,6 @@ import android.app.Activity;
  * Created by kurt on 20/05/13.
  */
 public class Calculator{
-	
-	// Filename constant
-	private final String FILENAME = "preferences.txt";
 	
 	// Fields to store values
 	private double _hours;
