@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         eTPayRate = (EditText)findViewById(R.id.editTextPayRate);
         rBWeekly = (RadioButton)findViewById(R.id.radioButtonWeekly);
         rBFortnightly = (RadioButton)findViewById(R.id.radioButtonFortnightly);
-        rBMonthly = (RadioButton)findViewById(R.id.radioButtonMonthly);
+        //rBMonthly = (RadioButton)findViewById(R.id.radioButtonMonthly);
 
         //Set on click listener for bCalculate, and only execute if something is typed in the EditText eTHoursWorked
         bCalculate.setOnClickListener(new View.OnClickListener() {

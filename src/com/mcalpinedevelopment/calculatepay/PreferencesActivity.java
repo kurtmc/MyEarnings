@@ -65,7 +65,7 @@ public class PreferencesActivity extends Activity {
         eTName = (EditText)findViewById(R.id.editTextName);
         rBWeekly = (RadioButton)findViewById(R.id.radioButtonWeekly);
         rBFortnightly = (RadioButton)findViewById(R.id.radioButtonFortnightly);
-        rBMonthly = (RadioButton)findViewById(R.id.radioButtonMonthly);
+        //rBMonthly = (RadioButton)findViewById(R.id.radioButtonMonthly);
         cBSL = (CheckBox)findViewById(R.id.checkBoxSL);
         rBM = (RadioButton)findViewById(R.id.radioButtonM);
         rBME = (RadioButton)findViewById(R.id.radioButtonME);

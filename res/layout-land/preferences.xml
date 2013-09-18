@@ -56,12 +56,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/fortnightly"
                         android:id="@+id/radioButtonFortnightly" android:layout_gravity="left|center_vertical" android:checked="false"/>
-                <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:text="@string/monthly"
-                        android:id="@+id/radioButtonMonthly" android:checked="false"
-                        android:visibility="invisible"/>
             </RadioGroup>
             <TextView
                     android:layout_width="wrap_content"
