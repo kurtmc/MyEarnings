@@ -82,13 +82,6 @@ public class CalculateActivity extends Activity{
         tvDataToDisplay2 = (TextView)findViewById(R.id.dataToDisplay2);
         tvDataToDisplay3 = (TextView)findViewById(R.id.dataToDisplay3);
         tvDataToDisplay4 = (TextView)findViewById(R.id.dataToDisplay4);
-//        double[] taxData = computePayslip();
-//        String[] pay = {getString(R.string.gross) + String.format("%.2f",taxData[0]),getString(R.string.paye) + String.format("%.2f",taxData[1]),getString(R.string.studentLoadCalc) + String.format("%.2f",taxData[2]),getString(R.string.kiwi_saver_calc) + String.format("%.2f",taxData[3]),getString(R.string.nett) + String.format("%.2f",taxData[4])};
-//        tvDataToDisplay0.setText(pay[0]);
-//        tvDataToDisplay1.setText(pay[1]);
-//        tvDataToDisplay2.setText(pay[2]);
-//        tvDataToDisplay3.setText(pay[3]);
-//        tvDataToDisplay4.setText(pay[4]);
         
         // Instantiate Employee object
         Employee employee = new Employee(message, this);
@@ -235,59 +228,5 @@ public class CalculateActivity extends Activity{
         // Return the tax one week
         return total*1.0/52.0;
     }*/
-
-
-    private double[] computePayslip() {
-        String[] preferencesArray = readPreferences().split(",");
-        double gross = _rate*_hours;
-        String[] taxData = readTaxData().split(",");
-        double paye = 0;
-        if (preferencesArray[3].equals("M")) {
-            paye = Double.parseDouble(taxData[1]);
-        } else if (preferencesArray[3].equals("ME")) {
-            paye = Double.parseDouble(taxData[2]);
-        } else if (preferencesArray[3] .equals("ML")) {
-            paye = Double.parseDouble(taxData[3]);
-        }
-        double sL = 0;
-        if (preferencesArray[2].equals("true")) {
-            sL = Double.parseDouble(taxData[4]);
-        }
-        double kS = 0;
-        if (preferencesArray[4].equals("None")) {
-        } else if (preferencesArray[4].equals("1")){
-            kS = Double.parseDouble(taxData[5])/2.0;
-        } else if (preferencesArray[4].equals("2")) {
-            kS = Double.parseDouble(taxData[5]);
-        } else if (preferencesArray[4].equals("3")){
-            kS = Double.parseDouble(taxData[5])*(3.0/2.0);
-        } else if (preferencesArray[4].equals("4")) {
-            kS = Double.parseDouble(taxData[6]);
-        } else if (preferencesArray[4].equals("5")){
-            kS = Double.parseDouble(taxData[6])*(5.0/4.0);
-        } else if (preferencesArray[4].equals("6")){
-            kS = Double.parseDouble(taxData[6])*(6.0/4.0);
-        } else if (preferencesArray[4].equals("7")){
-            kS = Double.parseDouble(taxData[6])*(7.0/4.0);
-        } else if (preferencesArray[4].equals("8")) {
-            kS = Double.parseDouble(taxData[7]);
-        }
-        double nett = gross - paye - sL - kS;
-        double[] outputTaxData = {gross,paye,sL,kS,nett};
-
-        return outputTaxData;
-    }
-
-    //Overriding back button
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            Intent intent = new Intent(this, MainActivity.class);
-            String message = "";
-            intent.putExtra("", message);
-            startActivity(intent);
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 
 }
