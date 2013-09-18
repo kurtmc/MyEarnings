@@ -14,13 +14,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * Created by kurt on 26/05/13.
@@ -44,6 +40,8 @@ public class PreferencesActivity extends Activity {
 
     String FILENAME = "preferences.txt";
 
+    //FileReader to read preferences.txt
+    FileReader _fileReader;
 
     @SuppressLint("NewApi")
     @Override
@@ -58,12 +56,10 @@ public class PreferencesActivity extends Activity {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // Get the message from the intent
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
         setContentView(R.layout.preferences);
 
+        //Instantiate FileReader
+        _fileReader = new FileReader(this);
 
         //Widget assignments
         eTName = (EditText)findViewById(R.id.editTextName);
@@ -161,26 +157,27 @@ public class PreferencesActivity extends Activity {
 
     }
 
-    private String readText() {
-        try {
-
-            StringBuilder fileContent = new StringBuilder();
-            FileInputStream fis = openFileInput(FILENAME);
-
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = fis.read(buffer)) != -1) {
-                fileContent.append(new String(buffer));
-            }
-            fis.close();
-
-            return fileContent.toString();
-
-        } catch (FileNotFoundException e) {
-            return "Enter Name,Weekly,false,M,None,0.0";
-        } catch (IOException e) {
-            return "Enter Name,Weekly,false,M,None,0.0";
-        }
+    private String readText() {   
+    	return _fileReader.readPreferences();
+//        try {
+//
+//            StringBuilder fileContent = new StringBuilder();
+//            FileInputStream fis = openFileInput(FILENAME);
+//
+//            byte[] buffer = new byte[1024];
+//            int length;
+//            while ((length = fis.read(buffer)) != -1) {
+//                fileContent.append(new String(buffer));
+//            }
+//            fis.close();
+//
+//            return fileContent.toString();
+//
+//        } catch (FileNotFoundException e) {
+//            return "Enter Name,Weekly,false,M,None,0.0";
+//        } catch (IOException e) {
+//            return "Enter Name,Weekly,false,M,None,0.0";
+//        }
 
         /*
         String line = "";
