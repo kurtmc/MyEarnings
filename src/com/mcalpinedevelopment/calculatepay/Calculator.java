@@ -16,20 +16,19 @@ public class Calculator{
 	private FileReader _fileReader;
 	
 	/**
-	 * @param message
+	 * @param hoursWorked
 	 * message is the String passed from MainActivity it contains a String
 	 * that represents how many hours were worked
 	 * @param activity
 	 * activity is needed for context so that FileReader can be instantiated
 	 */
-	public Calculator(String message, Activity activity) {
+	public Calculator(String hoursWorked, Activity activity) {
 		// Instantiate FileReader for later use
 		_fileReader = new FileReader(activity);
 		
-		String payInfo = message;
-        try {
-            _hours = Double.parseDouble(payInfo);
-        } catch (NumberFormatException e) { // catch if there is wrong formatting, set to 0.0
+		try {
+			_hours = Double.parseDouble(hoursWorked);
+		} catch (NumberFormatException e) { // catch if there is wrong formatting, set to 0.0
             _hours = 0.0;
         } catch (NullPointerException e) { // catch if there is empty string, set to 0.0
         	_hours = 0.0;

@@ -59,9 +59,9 @@ public class CalculateActivity extends Activity{
 
         // Get the message from the intent
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String hoursWorked = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         
-        Calculator calculator = new Calculator(message, this);
+        Calculator calculator = new Calculator(hoursWorked, this);
         _hours = calculator.hours();
         _rate = calculator.rate();
         _paytype = calculator.paytype();
@@ -75,7 +75,7 @@ public class CalculateActivity extends Activity{
         tvDataToDisplay4 = (TextView)findViewById(R.id.dataToDisplay4);
         
         // Instantiate Employee object
-        Employee employee = new Employee(message, this);
+        Employee employee = new Employee(hoursWorked, this);
         
         tvDataToDisplay0.setText(employee.gross());
         tvDataToDisplay1.setText(employee.paye());
@@ -85,7 +85,7 @@ public class CalculateActivity extends Activity{
 
 
         
-        // === ADVERTISEMENT ========================================================
+        /*// === ADVERTISEMENT ========================================================
         // Create the adView
         adView = new AdView(this, AdSize.BANNER, MY_AD_UNIT_ID);
         // Lookup your LinearLayout assuming it's been given
