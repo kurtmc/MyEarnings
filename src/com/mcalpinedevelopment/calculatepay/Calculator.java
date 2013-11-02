@@ -23,8 +23,7 @@ public class Calculator{
 	 * activity is needed for context so that FileReader can be instantiated
 	 */
 	public Calculator(String hoursWorked, Activity activity) {
-		// Instantiate FileReader for later use
-		_fileReader = new FileReader(activity);
+		
 		
 		try {
 			_hours = Double.parseDouble(hoursWorked);
@@ -34,6 +33,8 @@ public class Calculator{
         	_hours = 0.0;
         }
 
+		// Instantiate FileReader to read Preferences
+		_fileReader = new FileReader(activity);
         String[] preferencesArray = _fileReader.readPreferences().split(",");
         
         // Catch exceptions where the String is either incorrectly formatted,
