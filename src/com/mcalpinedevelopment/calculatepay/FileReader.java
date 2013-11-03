@@ -4,23 +4,23 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import android.app.Activity;
+import android.content.Context;
 
 public class FileReader {
-	private Activity _activity;
+	private Context _context;
 	
 	// Filename constant
 	private final String FILENAME = "preferences.txt";
 	
-	public FileReader(Activity activity) {
-		_activity = activity;
+	public FileReader(Context context) {
+		_context = context;
 	}
 	
 	public String readPreferences() {
 		try {
 
             StringBuilder fileContent = new StringBuilder();
-            FileInputStream fis = _activity.openFileInput(FILENAME);
+            FileInputStream fis = _context.openFileInput(FILENAME);
 
             byte[] buffer = new byte[1024];
             @SuppressWarnings("unused")

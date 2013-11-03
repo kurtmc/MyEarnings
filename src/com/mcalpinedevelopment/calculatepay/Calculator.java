@@ -3,7 +3,7 @@ package com.mcalpinedevelopment.calculatepay;
 import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
 import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
 
-import android.app.Activity;
+import android.content.Context;
 
 
 /**
@@ -24,7 +24,7 @@ public class Calculator {
 	 * @param activity
 	 * activity is needed for context so that FileReader can be instantiated
 	 */
-	public Calculator(String hoursWorked, Activity activity) {
+	public Calculator(String hoursWorked, Context activity) {
 		
 		
 		try {

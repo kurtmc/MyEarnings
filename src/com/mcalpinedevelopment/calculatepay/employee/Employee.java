@@ -8,13 +8,12 @@ import java.io.InputStreamReader;
 import com.mcalpinedevelopment.calculatepay.Calculator;
 import com.mcalpinedevelopment.calculatepay.FileReader;
 import com.mcalpinedevelopment.calculatepay.R;
-import com.mcalpinedevelopment.calculatepay.R.raw;
-import com.mcalpinedevelopment.calculatepay.R.string;
 
 import android.app.Activity;
+import android.content.Context;
 
 public class Employee {
-	private Activity _activity;
+	private Context _context;
 	
 	private double _hours;
 	private double _rate;
@@ -22,15 +21,15 @@ public class Employee {
 	private double[] _taxData;
 	private String[] _pay;
 	
-	public Employee(String message, Activity activity) {
-		_activity = activity;
-		Calculator calculator = new Calculator(message, _activity);
+	public Employee(String message, Context context) {
+		_context = context;
+		Calculator calculator = new Calculator(message, _context);
         _hours = calculator.hours();
         _rate = calculator.rate();
         _paytype = calculator.paytype();
         
         _taxData = computePayslip();
-        _pay = new String[] {_activity.getString(R.string.gross) + String.format("%.2f",_taxData[0]),_activity.getString(R.string.paye) + String.format("%.2f",_taxData[1]),_activity.getString(R.string.studentLoadCalc) + String.format("%.2f",_taxData[2]),_activity.getString(R.string.kiwi_saver_calc) + String.format("%.2f",_taxData[3]),_activity.getString(R.string.nett) + String.format("%.2f",_taxData[4])};
+        _pay = new String[] {_context.getString(R.string.gross) + String.format("%.2f",_taxData[0]),_context.getString(R.string.paye) + String.format("%.2f",_taxData[1]),_context.getString(R.string.studentLoadCalc) + String.format("%.2f",_taxData[2]),_context.getString(R.string.kiwi_saver_calc) + String.format("%.2f",_taxData[3]),_context.getString(R.string.nett) + String.format("%.2f",_taxData[4])};
 
 	}
 	
@@ -73,7 +72,7 @@ public class Employee {
 	
 	private double[] computePayslip() {
 		// Instantiate FileReader
-		FileReader fileReader = new FileReader(_activity);
+		FileReader fileReader = new FileReader(_context);
 		
         String[] preferencesArray = fileReader.readPreferences().split(",");
         double gross = _rate*_hours;
@@ -120,10 +119,10 @@ public class Employee {
         int readFactor;
         InputStream is;
         if (_paytype.equals("Weekly")) {
-            is = _activity.getResources().openRawResource(R.raw.weeklypaye);
+            is = _context.getResources().openRawResource(R.raw.weeklypaye);
             readFactor = 1;
         } else {
-            is = _activity.getResources().openRawResource(R.raw.fortnighlypaye);
+            is = _context.getResources().openRawResource(R.raw.fortnighlypaye);
             readFactor = 2;
         }
 
