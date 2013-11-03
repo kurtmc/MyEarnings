@@ -111,40 +111,4 @@ public class CalculateActivity extends Activity{
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /** ##################### Not technically used, perhaps implement later
-    private double calcPaye() {
-        // Declare some values
-        double total = 0;
-        double annualGross = 0;
-        //Estimate annual income for hourly paid employees, and set annual income for salaried employees
-        if (_paytype.equals("Monthly")) {
-            annualGross = _rate*_hours*12;
-        } else if (_paytype.equals("Fortnightly")) {
-            annualGross = _rate*_hours*52.0/2.0;
-        } else if (_paytype.equals("Weekly")) {
-            annualGross = _rate*_hours*52;
-        }
-        //Go through each tax bracket and calculate the tax and add to total
-        while (annualGross != 0){
-            if (annualGross <= TAXBRACKET1) {
-                total += annualGross*TAXRATE1;
-                annualGross = 0;
-            } else if ((annualGross > TAXBRACKET1) &&  (annualGross <= TAXBRACKET2)) {
-                total += (annualGross - TAXBRACKET1)*TAXRATE2;
-                annualGross = TAXBRACKET1;
-            } else if ((annualGross > TAXBRACKET2) &&  (annualGross <= TAXBRACKET3)) {
-                total += (annualGross - TAXBRACKET2)*TAXRATE3;
-                annualGross = TAXBRACKET2;
-            } else if (annualGross > TAXBRACKET3) {
-                total += (annualGross - TAXBRACKET3)*TAXRATE4;
-                annualGross = TAXBRACKET3;
-            }
-        }
-        //Calculate PAYE correctly
-        double earnings = _hours*_rate;
-        int earningsInt = (int)earnings;
-        // Return the tax one week
-        return total*1.0/52.0;
-    }*/
 }
