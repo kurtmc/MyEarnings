@@ -108,28 +108,6 @@ public class EmployeeDatabase {
 			
 		}
 		
-//		public void updateData(String name, String payPeriod, String kiwiSaver, String taxCode, String studentLoan, String hourlyPay) {
-//			if (getName() == null) {
-//				insertData(name, payPeriod, kiwiSaver, taxCode, studentLoan, hourlyPay);
-//				return;
-//			}
-//			Log.d("myDatabase","Update data");
-//			SQLiteDatabase db;
-//			db =  openDatabase();
-//			
-//			ContentValues values = new ContentValues();
-//			values.put(NAME, name);
-//			values.put(PAY_PERIOD, payPeriod);
-//			values.put(KIWI_SAVER, kiwiSaver);
-//			values.put(TAX_CODE, taxCode);			
-//			values.put(STUDENT_LOAN, studentLoan);
-//			values.put(HOURLY_PAY, hourlyPay);
-//			
-//			db.update(TABLE_NAME, values,NAME + "=" + "\'"+getName()+"\'", null);
-//			
-//			db.close();
-//		}
-		
 		public EmployeePreferences getEmployeeDetails() {
 			SQLiteDatabase db;
 			db =  openDatabase();		
@@ -146,7 +124,6 @@ public class EmployeeDatabase {
 				Log.d("myDatabase", "Not empty");
 			}
 			
-//			String[] details = null;
 			EmployeePreferences dM = new EmployeePreferences();
 			
 			try {
@@ -156,7 +133,6 @@ public class EmployeeDatabase {
 				dM.set_taxCode(rows.getString(3));
 				dM.set_kiwiSaver(rows.getString(4));
 				dM.set_hourlyPay(rows.getString(5));
-//				details = new String[]{rows.getString(0), rows.getString(1), rows.getString(2), rows.getString(3), rows.getString(4), rows.getString(5)};
 			} catch (CursorIndexOutOfBoundsException e) {
 			}
 			

@@ -86,7 +86,7 @@ public class CalculateActivity extends Activity{
 
 
         
-        /*// === ADVERTISEMENT ========================================================
+        // === ADVERTISEMENT ========================================================
         // Create the adView
         adView = new AdView(this, AdSize.BANNER, MY_AD_UNIT_ID);
         // Lookup your LinearLayout assuming it's been given
