@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.ads.*;
+import com.mcalpinedevelopment.calculatepay.employee.Employee;
 
 
 /**
@@ -110,18 +111,6 @@ public class CalculateActivity extends Activity{
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-    /*
-    private String GetValues() {
-        _hours = hoursWorked;
-        _rate = payRate;
-        _paytype = inputpayType;
-
-    }
-    */
 
     /** ##################### Not technically used, perhaps implement later
     private double calcPaye() {

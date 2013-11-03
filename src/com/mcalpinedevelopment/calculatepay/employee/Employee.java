@@ -1,9 +1,15 @@
-package com.mcalpinedevelopment.calculatepay;
+package com.mcalpinedevelopment.calculatepay.employee;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import com.mcalpinedevelopment.calculatepay.Calculator;
+import com.mcalpinedevelopment.calculatepay.FileReader;
+import com.mcalpinedevelopment.calculatepay.R;
+import com.mcalpinedevelopment.calculatepay.R.raw;
+import com.mcalpinedevelopment.calculatepay.R.string;
 
 import android.app.Activity;
 
