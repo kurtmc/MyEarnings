@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import android.widget.SeekBar;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import com.mcalpinedevelopment.calculatepay.database.Database;
 
 /**
  * Created by kurt on 26/05/13.
@@ -166,7 +169,19 @@ public class PreferencesActivity extends Activity {
     }
 
     private String readText() {   
-    	return _fileReader.readPreferences();
+    	Log.d("myDatabase", "Reading database");
+    	Database db = Database.getDatabase(this);
+    	String[] dm = db.getEmployeeDetails();
+    	return dm[0]+","+dm[1]+","+dm[2]+","+dm[3]+","+dm[4]+","+dm[5];
+//    	if (dm != null) {
+//    		Log.d("myDatabase", dm[0] + dm[1]);
+//    	}
+//    	if (db.getName() != null) {
+//    		Log.d("myDatabase",db.getName());
+//    	}
+//    	
+//    	
+//    	return _fileReader.readPreferences();
     }
 
     private void writePreferences(){
@@ -214,7 +229,12 @@ public class PreferencesActivity extends Activity {
 
         preferencesToSave.append(eTPayRate.getText() + ",");
 
-
+        
+        // Save preferences to database
+        String[] employeeDetails = preferencesToSave.toString().split(",");
+        Database db = Database.getDatabase(this);
+        Log.d("myDatabase", "Writing database");
+        db.updateData(employeeDetails[0], employeeDetails[1], employeeDetails[2], employeeDetails[3], employeeDetails[4], employeeDetails[5]);
 
         //Save preferences to local storage
         try {
