@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 
-import com.mcalpinedevelopment.calculatepay.database.DetailMessage;
+import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
 import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
 
 /**
@@ -105,7 +105,7 @@ public class PreferencesActivity extends Activity {
         });
 
         //Setup preferences from previous input
-        DetailMessage dM = readEmployeeInfo();
+        EmployeePreferences dM = readEmployeeInfo();
         eTName.setText(dM.get_name());
         if (dM.get_payPeriod().equals("Weekly")) {
             rBWeekly.setChecked(true);
@@ -156,21 +156,14 @@ public class PreferencesActivity extends Activity {
      * @return String int the format
      * Name, pay period, student loan, tax code, kiwi saver, hourly pay
      */
-    private DetailMessage readEmployeeInfo() {   
+    private EmployeePreferences readEmployeeInfo() {   
     	Log.d("myDatabase", "Reading database");
     	EmployeeDatabase db = EmployeeDatabase.getDatabase(this);
-    	DetailMessage dM = db.getEmployeeDetails();
+    	EmployeePreferences dM = db.getEmployeeDetails();
     	if (dM != null && dM.get_payPeriod() != null) {
     		return dM;
     	}
-    	dM = new DetailMessage();
-    	dM.set_name("Enter name");
-    	dM.set_payPeriod("Weekly");
-    	dM.set_taxCode("M");
-    	dM.set_kiwiSaver("None");
-    	dM.set_studentLoan("false");
-    	dM.set_hourlyPay("0.0");
-    	return dM;
+    	return EmployeePreferences.defaultValue();
     }
 
     private void writePreferences() {    	
@@ -220,7 +213,7 @@ public class PreferencesActivity extends Activity {
         EmployeeDatabase db = EmployeeDatabase.getDatabase(this);
         Log.d("myDatabase", "Writing database");
         
-        DetailMessage dM = new DetailMessage();
+        EmployeePreferences dM = new EmployeePreferences();
     	dM.set_name(name);
     	dM.set_payPeriod(payPeriod);
     	dM.set_taxCode(taxCode);

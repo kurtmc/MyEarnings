@@ -67,7 +67,7 @@ public class EmployeeDatabase {
 			}
 		}
 		
-		private void insertData(DetailMessage dM) {
+		private void insertData(EmployeePreferences dM) {
 			Log.d("myDatabase","Insert data");
 			SQLiteDatabase db;
 			db =  openDatabase();
@@ -85,7 +85,7 @@ public class EmployeeDatabase {
 			db.close(); // Always close the database
 		}
 		
-		public void updateData(DetailMessage dM) {
+		public void updateData(EmployeePreferences dM) {
 			if (getName() == null) {
 				insertData(dM);
 				return;
@@ -130,7 +130,7 @@ public class EmployeeDatabase {
 //			db.close();
 //		}
 		
-		public DetailMessage getEmployeeDetails() {
+		public EmployeePreferences getEmployeeDetails() {
 			SQLiteDatabase db;
 			db =  openDatabase();		
 			Cursor rows = null;
@@ -147,7 +147,7 @@ public class EmployeeDatabase {
 			}
 			
 //			String[] details = null;
-			DetailMessage dM = new DetailMessage();
+			EmployeePreferences dM = new EmployeePreferences();
 			
 			try {
 				dM.set_name(rows.getString(0));

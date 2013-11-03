@@ -1,6 +1,6 @@
 package com.mcalpinedevelopment.calculatepay.database;
 
-public class DetailMessage {
+public class EmployeePreferences {
 	private String _name;
 	private String _payPeriod;
 	private String _taxCode;
@@ -46,7 +46,7 @@ public class DetailMessage {
 	}
 	@Override
 	public boolean equals(Object obj) {
-		DetailMessage dM = (DetailMessage) obj;
+		EmployeePreferences dM = (EmployeePreferences) obj;
 		if (	   this._hourlyPay.equals(dM._hourlyPay)
 				&& this._name.equals(dM._name)
 				&& this._payPeriod.equals(dM._payPeriod)
@@ -66,6 +66,20 @@ public class DetailMessage {
 		+ 		"Tax code: "		+ this._taxCode 	+ ", " 
 		+ 		"Kiwi Saver: "		+ this._kiwiSaver 	+ ", " 
 		+ 		"Student loan: "	+ this._studentLoan;
+	}
+	
+	/**
+	 * @return a DetailMessage with default values
+	 */
+	public static EmployeePreferences defaultValue() {
+		EmployeePreferences dM = new EmployeePreferences();
+    	dM.set_name("Enter name");
+    	dM.set_payPeriod("Weekly");
+    	dM.set_taxCode("M");
+    	dM.set_kiwiSaver("None");
+    	dM.set_studentLoan("false");
+    	dM.set_hourlyPay("0.0");
+    	return dM;
 	}
 	
 	

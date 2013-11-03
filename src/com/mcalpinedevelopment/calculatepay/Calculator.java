@@ -1,19 +1,21 @@
 package com.mcalpinedevelopment.calculatepay;
 
+import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
+
 import android.app.Activity;
 
 
 /**
  * Created by kurt on 20/05/13.
  */
-public class Calculator{
+public class Calculator {
 	
 	// Fields to store values
 	private double _hours;
 	private double _rate;
-	private String _paytype;
-	
-	private FileReader _fileReader;
+	private String _payPeriod;
+
 	
 	/**
 	 * @param hoursWorked
@@ -33,21 +35,18 @@ public class Calculator{
         	_hours = 0.0;
         }
 
-		// Instantiate FileReader to read Preferences
-		_fileReader = new FileReader(activity);
-        String[] preferencesArray = _fileReader.readPreferences().split(",");
-        
-        // Catch exceptions where the String is either incorrectly formatted,
-        // or it is empty
+		EmployeeDatabase db = EmployeeDatabase.getDatabase(activity);
+		EmployeePreferences dM = db.getEmployeeDetails();
+		
         try {
-        	_rate = Double.parseDouble(preferencesArray[5]);
+        	_rate = Double.parseDouble(dM.get_hourlyPay());
         } catch (NumberFormatException e) {
         	_rate = 0.0;
         } catch (NullPointerException e) {
         	_rate = 0.0;
         }        
         
-        _paytype = preferencesArray[1];
+        _payPeriod = dM.get_payPeriod();
 	}
 	
 	public double rate() {
@@ -57,6 +56,6 @@ public class Calculator{
 		return _hours;
 	}
 	public String paytype() {
-		return _paytype;
+		return _payPeriod;
 	}
 }
