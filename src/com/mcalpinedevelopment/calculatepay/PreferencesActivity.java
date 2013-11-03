@@ -2,7 +2,7 @@ package com.mcalpinedevelopment.calculatepay;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,10 +14,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import com.mcalpinedevelopment.calculatepay.database.DetailMessage;
 import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
@@ -42,17 +38,10 @@ public class PreferencesActivity extends Activity {
     SeekBar sBKiwiSaver;
     RadioButton rBVarKiwiSaver;
 
-    String FILENAME = "preferences.txt";
-
-    //FileReader to read preferences.txt
-    FileReader _fileReader;
-
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
 
         // Make sure we're running on Honeycomb or higher to use ActionBar APIs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -61,9 +50,6 @@ public class PreferencesActivity extends Activity {
         }
 
         setContentView(R.layout.preferences);
-
-        //Instantiate FileReader
-        _fileReader = new FileReader(this);
 
         //Widget assignments
         eTName = (EditText)findViewById(R.id.editTextName);
@@ -105,20 +91,20 @@ public class PreferencesActivity extends Activity {
                 }
             }
 
-            public void onStartTrackingTouch(SeekBar arg0) {
-                // TODO Auto-generated method stub
+			@Override
+			public void onStartTrackingTouch(SeekBar arg0) {
+				// TODO Auto-generated method stub
+				
+			}
 
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
-            }
-
+			@Override
+			public void onStopTrackingTouch(SeekBar arg0) {
+				// TODO Auto-generated method stub
+				
+			}
         });
 
         //Setup preferences from previous input
-//        String[] preferences = readEmployeeInfo().split(",");
         DetailMessage dM = readEmployeeInfo();
         eTName.setText(dM.get_name());
         if (dM.get_payPeriod().equals("Weekly")) {
@@ -155,17 +141,13 @@ public class PreferencesActivity extends Activity {
         	eTPayRate.setText("0.0");
         } catch (NullPointerException e) {
         	eTPayRate.setText("0.0");
-        }
-        
+        }        
 
         bSave.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 writePreferences();
                 goBackToMainView(v);
             }
-
-
         });
 
     }
@@ -191,73 +173,50 @@ public class PreferencesActivity extends Activity {
     	return dM;
     }
 
-    private void writePreferences(){
-//        StringBuilder preferencesToSave = new StringBuilder();
-    	
-    	
-        String name = eTName.getText().toString();
-//        preferencesToSave.append(eTName.getText()+",");
-
-        String payPeriod = null;
-        if (rBWeekly.isChecked()) {
+    private void writePreferences() {    	
+		String name = eTName.getText().toString();
+		String payPeriod = null;
+		if (rBWeekly.isChecked()) {
         	payPeriod = "Weekly";
-//            preferencesToSave.append("Weekly,");
         } else if (rBFortnightly.isChecked()) {
         	payPeriod = "Fortnightly";
-//            preferencesToSave.append("Fortnightly,");
         } else if (rBMonthly.isChecked()) {
         	payPeriod = "Monthly";
-//            preferencesToSave.append("Monthly,");
-        } //else {
-//            preferencesToSave.append(",");
-//        }
+        }
 
         String studentLoan = null;
         if (cBSL.isChecked()) {
         	studentLoan = "true";
-//            preferencesToSave.append("true,");
         } else {
         	studentLoan = "false";
-//            preferencesToSave.append("false,");
         }
         
         String taxCode = null;
         if (rBM.isChecked()) {
         	taxCode = "M";
-//            preferencesToSave.append("M,");
         } else if (rBME.isChecked()) {
         	taxCode = "ME";
-//            preferencesToSave.append("ME,");
         } else if (rBML.isChecked()) {
         	taxCode = "ML";
-//            preferencesToSave.append("ML,");
-        } //else {
-//            preferencesToSave.append(",");
-//        }
+        } 
         
         String kiwiSaver = null;
         if (rBKSNone.isChecked()) {
         	kiwiSaver = "None";
-//            preferencesToSave.append("None,");
         } else {
             //This is really a quick fix
             //So you should probably go and fix the problem where you can potentially save a 0 length string
             //as your kiwisaver value
             try {
                 kiwiSaver = rBVarKiwiSaver.getText().charAt(0)+"";
-//                preferencesToSave.append(kiwiSaver+",");
             } catch (StringIndexOutOfBoundsException e) {
             	kiwiSaver = "None";
-//                preferencesToSave.append("None,");
             }
         }
 
         String payRate = eTPayRate.getText().toString();
-//        preferencesToSave.append(eTPayRate.getText() + ",");
-
         
         // Save preferences to database
-//        String[] employeeDetails = preferencesToSave.toString().split(",");
         EmployeeDatabase db = EmployeeDatabase.getDatabase(this);
         Log.d("myDatabase", "Writing database");
         
@@ -270,20 +229,6 @@ public class PreferencesActivity extends Activity {
     	dM.set_hourlyPay(payRate);
         
         db.updateData(dM);
-
-        //Save preferences to local storage
-//        try {
-//            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-//            fos.write(preferencesToSave.toString().getBytes());
-//            fos.close();
-//
-//
-//        } catch (FileNotFoundException e) {
-//            System.out.println("File not found.");
-//        } catch (IOException e) {
-//            System.out.println("IOException");
-//        }
-
     }
     public void goBackToMainView(View view) {
         Intent intent = new Intent(this, MainActivity.class);
