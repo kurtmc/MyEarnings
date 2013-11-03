@@ -19,7 +19,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.mcalpinedevelopment.calculatepay.database.Database;
+import com.mcalpinedevelopment.calculatepay.database.DetailMessage;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
 
 /**
  * Created by kurt on 26/05/13.
@@ -117,38 +118,39 @@ public class PreferencesActivity extends Activity {
         });
 
         //Setup preferences from previous input
-        String[] preferences = readText().split(",");
-        eTName.setText(preferences[0]);
-        if (preferences[1].equals("Weekly")) {
+//        String[] preferences = readEmployeeInfo().split(",");
+        DetailMessage dM = readEmployeeInfo();
+        eTName.setText(dM.get_name());
+        if (dM.get_payPeriod().equals("Weekly")) {
             rBWeekly.setChecked(true);
-        } else if (preferences[1].equals("Fortnightly")) {
+        } else if (dM.get_payPeriod().equals("Fortnightly")) {
             rBFortnightly.setChecked(true);
-        } else if (preferences[1].equals("Monthly")) {
+        } else if (dM.get_payPeriod().equals("Monthly")) {
             rBMonthly.setChecked(true);
         }
-        if (preferences[2].equals("true")) {
+        if (dM.get_studentLoan().equals("true")) {
             cBSL.setChecked(true);
         } else {
             cBSL.setChecked(false);
         }
-        if (preferences[3].equals("M")) {
+        if (dM.get_taxCode().equals("M")) {
             rBM.setChecked(true);
-        } else if (preferences[3].equals("ME")) {
+        } else if (dM.get_taxCode().equals("ME")) {
             rBME.setChecked(true);
-        } else if (preferences[3].equals("ML")) {
+        } else if (dM.get_taxCode().equals("ML")) {
             rBML.setChecked(true);
         }
-        if (preferences[4].equals("None")) {
+        if (dM.get_kiwiSaver().equals("None")) {
             rBKSNone.setChecked(true);            
         } else {
             rBVarKiwiSaver.setChecked(true);
-            rBVarKiwiSaver.setText(preferences[4]+" %");
-            sBKiwiSaver.setProgress((int)((Double.parseDouble(preferences[4])-1)*100.0/7.0));
+            rBVarKiwiSaver.setText(dM.get_kiwiSaver()+" %");
+            sBKiwiSaver.setProgress((int)((Double.parseDouble(dM.get_kiwiSaver())-1)*100.0/7.0));
         }
         
         try {
-        	Double.parseDouble(preferences[5]);
-        	eTPayRate.setText(preferences[5]);
+        	Double.parseDouble(dM.get_hourlyPay());
+        	eTPayRate.setText(dM.get_hourlyPay());
         } catch (NumberFormatException e) {
         	eTPayRate.setText("0.0");
         } catch (NullPointerException e) {
@@ -168,86 +170,119 @@ public class PreferencesActivity extends Activity {
 
     }
 
-    private String readText() {   
+    /**
+     * @return String int the format
+     * Name, pay period, student loan, tax code, kiwi saver, hourly pay
+     */
+    private DetailMessage readEmployeeInfo() {   
     	Log.d("myDatabase", "Reading database");
-    	Database db = Database.getDatabase(this);
-    	String[] dm = db.getEmployeeDetails();
-    	return dm[0]+","+dm[1]+","+dm[2]+","+dm[3]+","+dm[4]+","+dm[5];
-//    	if (dm != null) {
-//    		Log.d("myDatabase", dm[0] + dm[1]);
-//    	}
-//    	if (db.getName() != null) {
-//    		Log.d("myDatabase",db.getName());
-//    	}
-//    	
-//    	
-//    	return _fileReader.readPreferences();
+    	EmployeeDatabase db = EmployeeDatabase.getDatabase(this);
+    	DetailMessage dM = db.getEmployeeDetails();
+    	if (dM != null && dM.get_payPeriod() != null) {
+    		return dM;
+    	}
+    	dM = new DetailMessage();
+    	dM.set_name("Enter name");
+    	dM.set_payPeriod("Weekly");
+    	dM.set_taxCode("M");
+    	dM.set_kiwiSaver("None");
+    	dM.set_studentLoan("false");
+    	dM.set_hourlyPay("0.0");
+    	return dM;
     }
 
     private void writePreferences(){
-        StringBuilder preferencesToSave = new StringBuilder();
+//        StringBuilder preferencesToSave = new StringBuilder();
+    	
+    	
+        String name = eTName.getText().toString();
+//        preferencesToSave.append(eTName.getText()+",");
 
-        preferencesToSave.append(eTName.getText()+",");
-
+        String payPeriod = null;
         if (rBWeekly.isChecked()) {
-            preferencesToSave.append("Weekly,");
+        	payPeriod = "Weekly";
+//            preferencesToSave.append("Weekly,");
         } else if (rBFortnightly.isChecked()) {
-            preferencesToSave.append("Fortnightly,");
+        	payPeriod = "Fortnightly";
+//            preferencesToSave.append("Fortnightly,");
         } else if (rBMonthly.isChecked()) {
-            preferencesToSave.append("Monthly,");
-        } else {
-            preferencesToSave.append(",");
-        }
+        	payPeriod = "Monthly";
+//            preferencesToSave.append("Monthly,");
+        } //else {
+//            preferencesToSave.append(",");
+//        }
 
+        String studentLoan = null;
         if (cBSL.isChecked()) {
-            preferencesToSave.append("true,");
+        	studentLoan = "true";
+//            preferencesToSave.append("true,");
         } else {
-            preferencesToSave.append("false,");
+        	studentLoan = "false";
+//            preferencesToSave.append("false,");
         }
+        
+        String taxCode = null;
         if (rBM.isChecked()) {
-            preferencesToSave.append("M,");
+        	taxCode = "M";
+//            preferencesToSave.append("M,");
         } else if (rBME.isChecked()) {
-            preferencesToSave.append("ME,");
+        	taxCode = "ME";
+//            preferencesToSave.append("ME,");
         } else if (rBML.isChecked()) {
-            preferencesToSave.append("ML,");
-        } else {
-            preferencesToSave.append(",");
-        }
+        	taxCode = "ML";
+//            preferencesToSave.append("ML,");
+        } //else {
+//            preferencesToSave.append(",");
+//        }
+        
+        String kiwiSaver = null;
         if (rBKSNone.isChecked()) {
-            preferencesToSave.append("None,");
+        	kiwiSaver = "None";
+//            preferencesToSave.append("None,");
         } else {
             //This is really a quick fix
             //So you should probably go and fix the problem where you can potentially save a 0 length string
             //as your kiwisaver value
             try {
-                String kiwiSaver = rBVarKiwiSaver.getText().charAt(0)+"";
-                preferencesToSave.append(kiwiSaver+",");
+                kiwiSaver = rBVarKiwiSaver.getText().charAt(0)+"";
+//                preferencesToSave.append(kiwiSaver+",");
             } catch (StringIndexOutOfBoundsException e) {
-                preferencesToSave.append("None,");
+            	kiwiSaver = "None";
+//                preferencesToSave.append("None,");
             }
         }
 
-        preferencesToSave.append(eTPayRate.getText() + ",");
+        String payRate = eTPayRate.getText().toString();
+//        preferencesToSave.append(eTPayRate.getText() + ",");
 
         
         // Save preferences to database
-        String[] employeeDetails = preferencesToSave.toString().split(",");
-        Database db = Database.getDatabase(this);
+//        String[] employeeDetails = preferencesToSave.toString().split(",");
+        EmployeeDatabase db = EmployeeDatabase.getDatabase(this);
         Log.d("myDatabase", "Writing database");
-        db.updateData(employeeDetails[0], employeeDetails[1], employeeDetails[2], employeeDetails[3], employeeDetails[4], employeeDetails[5]);
+        
+        DetailMessage dM = new DetailMessage();
+    	dM.set_name(name);
+    	dM.set_payPeriod(payPeriod);
+    	dM.set_taxCode(taxCode);
+    	dM.set_kiwiSaver(kiwiSaver);
+    	dM.set_studentLoan(studentLoan);
+    	dM.set_hourlyPay(payRate);
+        
+        db.updateData(dM);
 
         //Save preferences to local storage
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            fos.write(preferencesToSave.toString().getBytes());
-            fos.close();
-
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
-        } catch (IOException e) {
-            System.out.println("IOException");
-        }
+//        try {
+//            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+//            fos.write(preferencesToSave.toString().getBytes());
+//            fos.close();
+//
+//
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File not found.");
+//        } catch (IOException e) {
+//            System.out.println("IOException");
+//        }
 
     }
     public void goBackToMainView(View view) {

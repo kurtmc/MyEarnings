@@ -8,11 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-public class Database {
+public class EmployeeDatabase {
 		// Activity reference
 		Context _context;
 		
-		private static Database _instance;
+		private static EmployeeDatabase _instance;
 		
 		private final String DATABASE_NAME = "EmployeeData.db";
 		private final String TABLE_NAME = "employee";
@@ -20,8 +20,8 @@ public class Database {
 		// Table columns
 		private final String NAME = "name";
 		private final String PAY_PERIOD = "pay_period";
-		private final String TAX_CODE = "tax_code";
 		private final String KIWI_SAVER = "kiwi_saver";
+		private final String TAX_CODE = "tax_code";
 		private final String STUDENT_LOAN = "student_loan";
 		private final String HOURLY_PAY = "hourly_pay";
 
@@ -29,21 +29,21 @@ public class Database {
 		private final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" 
 				+ NAME 			+ " TEXT,"	
 				+ PAY_PERIOD 	+ " TEXT,"
+				+ STUDENT_LOAN 	+ " TEXT,"
 				+ TAX_CODE 		+ " TEXT,"
 				+ KIWI_SAVER 	+ " TEXT,"
-				+ STUDENT_LOAN 	+ " TEXT,"
 				+ HOURLY_PAY 	+ " TEXT"
 				+ ");";
 		
 		
-		private Database(Context context) {
+		private EmployeeDatabase(Context context) {
 			_context = context;
 			createDatabase();	
 		}
 		
-		public static Database getDatabase(Context context) {
+		public static EmployeeDatabase getDatabase(Context context) {
 			if (_instance == null) {
-				_instance = new Database(context);
+				_instance = new EmployeeDatabase(context);
 			}
 			return _instance;
 		}
@@ -67,27 +67,27 @@ public class Database {
 			}
 		}
 		
-		private void insertData(String name, String payPeriod, String taxCode, String kiwiSaver, String studentLoan, String hourlyPay) {
+		private void insertData(DetailMessage dM) {
 			Log.d("myDatabase","Insert data");
 			SQLiteDatabase db;
 			db =  openDatabase();
 			
 			ContentValues values = new ContentValues();
-			values.put(NAME, name);
-			values.put(PAY_PERIOD, payPeriod);
-			values.put(TAX_CODE, taxCode);
-			values.put(KIWI_SAVER, kiwiSaver);
-			values.put(STUDENT_LOAN, studentLoan);
-			values.put(HOURLY_PAY, hourlyPay);
+			values.put(NAME, dM.get_name());
+			values.put(PAY_PERIOD, dM.get_payPeriod());
+			values.put(KIWI_SAVER, dM.get_kiwiSaver());
+			values.put(TAX_CODE, dM.get_taxCode());			
+			values.put(STUDENT_LOAN, dM.get_studentLoan());
+			values.put(HOURLY_PAY, dM.get_hourlyPay());
 
 			db.insert(TABLE_NAME, null, values);
 			
 			db.close(); // Always close the database
 		}
 		
-		public void updateData(String name, String payPeriod, String taxCode, String kiwiSaver, String studentLoan, String hourlyPay) {
+		public void updateData(DetailMessage dM) {
 			if (getName() == null) {
-				insertData(name, payPeriod, taxCode, kiwiSaver, studentLoan, hourlyPay);
+				insertData(dM);
 				return;
 			}
 			Log.d("myDatabase","Update data");
@@ -95,19 +95,42 @@ public class Database {
 			db =  openDatabase();
 			
 			ContentValues values = new ContentValues();
-			values.put(NAME, name);
-			values.put(PAY_PERIOD, payPeriod);
-			values.put(TAX_CODE, taxCode);
-			values.put(KIWI_SAVER, kiwiSaver);
-			values.put(STUDENT_LOAN, studentLoan);
-			values.put(HOURLY_PAY, hourlyPay);
+			values.put(NAME, dM.get_name());
+			values.put(PAY_PERIOD, dM.get_payPeriod());
+			values.put(KIWI_SAVER, dM.get_kiwiSaver());
+			values.put(TAX_CODE, dM.get_taxCode());			
+			values.put(STUDENT_LOAN, dM.get_studentLoan());
+			values.put(HOURLY_PAY, dM.get_hourlyPay());
 			
 			db.update(TABLE_NAME, values,NAME + "=" + "\'"+getName()+"\'", null);
 			
 			db.close();
+			
 		}
 		
-		public String[] getEmployeeDetails() {
+//		public void updateData(String name, String payPeriod, String kiwiSaver, String taxCode, String studentLoan, String hourlyPay) {
+//			if (getName() == null) {
+//				insertData(name, payPeriod, kiwiSaver, taxCode, studentLoan, hourlyPay);
+//				return;
+//			}
+//			Log.d("myDatabase","Update data");
+//			SQLiteDatabase db;
+//			db =  openDatabase();
+//			
+//			ContentValues values = new ContentValues();
+//			values.put(NAME, name);
+//			values.put(PAY_PERIOD, payPeriod);
+//			values.put(KIWI_SAVER, kiwiSaver);
+//			values.put(TAX_CODE, taxCode);			
+//			values.put(STUDENT_LOAN, studentLoan);
+//			values.put(HOURLY_PAY, hourlyPay);
+//			
+//			db.update(TABLE_NAME, values,NAME + "=" + "\'"+getName()+"\'", null);
+//			
+//			db.close();
+//		}
+		
+		public DetailMessage getEmployeeDetails() {
 			SQLiteDatabase db;
 			db =  openDatabase();		
 			Cursor rows = null;
@@ -123,22 +146,23 @@ public class Database {
 				Log.d("myDatabase", "Not empty");
 			}
 			
-			String[] details = null;
+//			String[] details = null;
+			DetailMessage dM = new DetailMessage();
 			
 			try {
-				Log.d("myDatabase", "Database name: " + rows.getString(0));
-				Log.d("myDatabase", "Database pay period: " + rows.getString(1));
-				Log.d("myDatabase", "Database tax code: " + rows.getString(2));
-				Log.d("myDatabase", "Database kiwi saver: " + rows.getString(3));
-				Log.d("myDatabase", "Database student loan: " + rows.getString(4));
-				Log.d("myDatabase", "Database hourly pay: " + rows.getString(5));
-				details = new String[]{rows.getString(0), rows.getString(1), rows.getString(2), rows.getString(3), rows.getString(4), rows.getString(5)};
+				dM.set_name(rows.getString(0));
+				dM.set_payPeriod(rows.getString(1));
+				dM.set_studentLoan(rows.getString(2));
+				dM.set_taxCode(rows.getString(3));
+				dM.set_kiwiSaver(rows.getString(4));
+				dM.set_hourlyPay(rows.getString(5));
+//				details = new String[]{rows.getString(0), rows.getString(1), rows.getString(2), rows.getString(3), rows.getString(4), rows.getString(5)};
 			} catch (CursorIndexOutOfBoundsException e) {
 			}
 			
 			db.close();
 			
-			return details;
+			return dM;
 		}
 		
 		
@@ -182,4 +206,6 @@ public class Database {
 		public boolean deleteDatabase() {
 			return _context.deleteDatabase(DATABASE_NAME);
 		}
+
+		
 }
