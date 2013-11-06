@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.ads.*;
-import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
+//import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
 import com.mcalpinedevelopment.calculatepay.employee.Employee;
 
 
@@ -23,8 +23,8 @@ public class CalculateActivity extends Activity{
     private AdView adView;
     final private String MY_AD_UNIT_ID = "a151adb2d8447b7";
 
-    double _hours = 0;
-    double _rate = 0;
+//    double _hours = 0;
+//    double _rate = 0;
 //    EmployeeDetails.PayPeriod _paytype = null;
 
     /**
@@ -63,9 +63,9 @@ public class CalculateActivity extends Activity{
         Intent intent = getIntent();
         String hoursWorked = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         
-        Calculator calculator = new Calculator(hoursWorked, this);
-        _hours = calculator.hours();
-        _rate = calculator.rate();
+//        Calculator calculator = new Calculator(hoursWorked, this);
+//        _hours = calculator.hours();
+//        _rate = calculator.rate();
 //        _paytype = calculator.paytype();
 
         // Set the text view as the activity layout
