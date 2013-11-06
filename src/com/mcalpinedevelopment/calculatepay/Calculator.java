@@ -1,5 +1,6 @@
 package com.mcalpinedevelopment.calculatepay;
 
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
 import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
 import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
 
@@ -14,7 +15,7 @@ public class Calculator {
 	// Fields to store values
 	private double _hours;
 	private double _rate;
-	private String _payPeriod;
+	private EmployeeDetails.PayPeriod _payPeriod;
 
 	
 	/**
@@ -39,7 +40,7 @@ public class Calculator {
 		EmployeePreferences dM = db.getEmployeeDetails();
 		
         try {
-        	_rate = Double.parseDouble(dM.get_hourlyPay());
+        	_rate = dM.get_hourlyPay();
         } catch (NumberFormatException e) {
         	_rate = 0.0;
         } catch (NullPointerException e) {
@@ -55,7 +56,7 @@ public class Calculator {
 	public double hours() {
 		return _hours;
 	}
-	public String paytype() {
+	public EmployeeDetails.PayPeriod paytype() {
 		return _payPeriod;
 	}
 }

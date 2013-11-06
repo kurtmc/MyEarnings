@@ -2,7 +2,9 @@ package com.mcalpinedevelopment.calculatepay.ui;
 
 import com.mcalpinedevelopment.calculatepay.MainActivity;
 import com.mcalpinedevelopment.calculatepay.R;
+import com.mcalpinedevelopment.calculatepay.database.DetailParseException;
 import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
 import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
 
 import android.annotation.SuppressLint;
@@ -104,41 +106,45 @@ public class PreferencesUI {
         //Setup preferences from previous input
         EmployeePreferences dM = readEmployeeInfo();
         eTName.setText(dM.get_name());
-        if (dM.get_payPeriod().equals("Weekly")) {
+        if (dM.get_payPeriod().equals(EmployeeDetails.PayPeriod.WEEKLY)) {
             rBWeekly.setChecked(true);
-        } else if (dM.get_payPeriod().equals("Fortnightly")) {
+        } else if (dM.get_payPeriod().equals(EmployeeDetails.PayPeriod.FORTNIGHTLY)) {
             rBFortnightly.setChecked(true);
-        } else if (dM.get_payPeriod().equals("Monthly")) {
+        } else if (dM.get_payPeriod().equals(EmployeeDetails.PayPeriod.MONTHLY)) {
             rBMonthly.setChecked(true);
         }
-        if (dM.get_studentLoan().equals("true")) {
+        if (dM.get_studentLoan().equals(EmployeeDetails.StudentLoan.TRUE)) {
             cBSL.setChecked(true);
         } else {
             cBSL.setChecked(false);
         }
-        if (dM.get_taxCode().equals("M")) {
+        if (dM.get_taxCode().equals(EmployeeDetails.TaxCode.M)) {
             rBM.setChecked(true);
-        } else if (dM.get_taxCode().equals("ME")) {
+        } else if (dM.get_taxCode().equals(EmployeeDetails.TaxCode.ME)) {
             rBME.setChecked(true);
-        } else if (dM.get_taxCode().equals("ML")) {
+        } else if (dM.get_taxCode().equals(EmployeeDetails.TaxCode.ML)) {
             rBML.setChecked(true);
         }
-        if (dM.get_kiwiSaver().equals("None")) {
+        if (dM.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.ZERO)) {
             rBKSNone.setChecked(true);            
         } else {
             rBVarKiwiSaver.setChecked(true);
             rBVarKiwiSaver.setText(dM.get_kiwiSaver()+" %");
-            sBKiwiSaver.setProgress((int)((Double.parseDouble(dM.get_kiwiSaver())-1)*100.0/7.0));
+//            sBKiwiSaver.setProgress((int)((Double.parseDouble(dM.get_kiwiSaver())-1)*100.0/7.0));
+            sBKiwiSaver.setProgress((int)(((dM.get_kiwiSaver().getValue())-1)*100.0/7.0));
         }
         
+        // #############################################
+        // Need to re-evalute this block
         try {
-        	Double.parseDouble(dM.get_hourlyPay());
-        	eTPayRate.setText(dM.get_hourlyPay());
+//        	Double.parseDouble(dM.get_hourlyPay());
+        	eTPayRate.setText(Double.toString(dM.get_hourlyPay()));
         } catch (NumberFormatException e) {
         	eTPayRate.setText("0.0");
         } catch (NullPointerException e) {
         	eTPayRate.setText("0.0");
-        }        
+        }    
+     // #############################################
 
         bSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -164,42 +170,44 @@ public class PreferencesUI {
     
     private void writePreferences() {    	
 		String name = eTName.getText().toString();
-		String payPeriod = null;
+		EmployeeDetails.PayPeriod payPeriod = null;
 		if (rBWeekly.isChecked()) {
-        	payPeriod = "Weekly";
+        	payPeriod = EmployeeDetails.PayPeriod.WEEKLY;
         } else if (rBFortnightly.isChecked()) {
-        	payPeriod = "Fortnightly";
+        	payPeriod = EmployeeDetails.PayPeriod.FORTNIGHTLY;
         } else if (rBMonthly.isChecked()) {
-        	payPeriod = "Monthly";
+        	payPeriod = EmployeeDetails.PayPeriod.MONTHLY;
         }
 
-        String studentLoan = null;
+		EmployeeDetails.StudentLoan studentLoan = null;
         if (cBSL.isChecked()) {
-        	studentLoan = "true";
+        	studentLoan = EmployeeDetails.StudentLoan.TRUE;
         } else {
-        	studentLoan = "false";
+        	studentLoan = EmployeeDetails.StudentLoan.FALSE;
         }
         
-        String taxCode = null;
+        EmployeeDetails.TaxCode taxCode = null;
         if (rBM.isChecked()) {
-        	taxCode = "M";
+        	taxCode = EmployeeDetails.TaxCode.M;
         } else if (rBME.isChecked()) {
-        	taxCode = "ME";
+        	taxCode = EmployeeDetails.TaxCode.ME;
         } else if (rBML.isChecked()) {
-        	taxCode = "ML";
+        	taxCode = EmployeeDetails.TaxCode.ML;
         } 
         
-        String kiwiSaver = null;
+        EmployeeDetails.KiwiSaver kiwiSaver = null;
         if (rBKSNone.isChecked()) {
-        	kiwiSaver = "None";
+        	kiwiSaver = EmployeeDetails.KiwiSaver.ZERO;
         } else {
             //This is really a quick fix
             //So you should probably go and fix the problem where you can potentially save a 0 length string
             //as your kiwisaver value
             try {
-                kiwiSaver = rBVarKiwiSaver.getText().charAt(0)+"";
+                kiwiSaver = EmployeeDetails.parseKiwiSaver(rBVarKiwiSaver.getText().charAt(0)+"");
             } catch (StringIndexOutOfBoundsException e) {
-            	kiwiSaver = "None";
+            	kiwiSaver = EmployeeDetails.KiwiSaver.ZERO;
+            } catch (DetailParseException e) {
+            	kiwiSaver = EmployeeDetails.KiwiSaver.ZERO;
             }
         }
 
@@ -215,7 +223,7 @@ public class PreferencesUI {
     	dM.set_taxCode(taxCode);
     	dM.set_kiwiSaver(kiwiSaver);
     	dM.set_studentLoan(studentLoan);
-    	dM.set_hourlyPay(payRate);
+    	dM.set_hourlyPay(Double.parseDouble(payRate));
         
         db.updateData(dM);
     }

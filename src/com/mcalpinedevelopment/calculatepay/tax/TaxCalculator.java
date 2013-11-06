@@ -9,11 +9,12 @@ import android.content.Context;
 
 import com.mcalpinedevelopment.calculatepay.R;
 import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
 import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
 
 public class TaxCalculator {
 
-	private String _payperiod;
+	private EmployeeDetails.PayPeriod _payperiod;
 	private Context _context;
 	
 	private String _taxTableInfo;
@@ -42,7 +43,7 @@ public class TaxCalculator {
         double grossIncome = _grossIncome;
         int readFactor;
         InputStream is;
-        if (_payperiod.equals("Weekly")) {
+        if (_payperiod.equals(EmployeeDetails.PayPeriod.WEEKLY)) {
             is = _context.getResources().openRawResource(R.raw.weeklypaye);
             readFactor = 1;
         } else {
@@ -82,34 +83,34 @@ public class TaxCalculator {
 		
         String[] taxData = _taxTableInfo.split(",");
         _paye = 0;
-        if (preferences.get_taxCode().equals("M")) {
+        if (preferences.get_taxCode().equals(EmployeeDetails.TaxCode.M)) {
         	_paye = Double.parseDouble(taxData[1]);
-        } else if (preferences.get_taxCode().equals("ME")) {
+        } else if (preferences.get_taxCode().equals(EmployeeDetails.TaxCode.ME)) {
         	_paye = Double.parseDouble(taxData[2]);
-        } else if (preferences.get_taxCode() .equals("ML")) {
+        } else if (preferences.get_taxCode() .equals(EmployeeDetails.TaxCode.ML)) {
         	_paye = Double.parseDouble(taxData[3]);
         }
         _studentLoan = 0;
-        if (preferences.get_studentLoan().equals("true")) {
+        if (preferences.get_studentLoan().equals(EmployeeDetails.StudentLoan.TRUE)) {
         	_studentLoan = Double.parseDouble(taxData[4]);
         }
         _kiwiSaver = 0;
-        if (preferences.get_kiwiSaver().equals("None")) {
-        } else if (preferences.get_kiwiSaver().equals("1")){
+        if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.ZERO)) {
+        } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.ONE)){
         	_kiwiSaver = Double.parseDouble(taxData[5])/2.0;
-        } else if (preferences.get_kiwiSaver().equals("2")) {
+        } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.TWO)) {
         	_kiwiSaver = Double.parseDouble(taxData[5]);
-        } else if (preferences.get_kiwiSaver().equals("3")){
+        } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.THREE)){
         	_kiwiSaver = Double.parseDouble(taxData[5])*(3.0/2.0);
-        } else if (preferences.get_kiwiSaver().equals("4")) {
+        } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.FOUR)) {
         	_kiwiSaver = Double.parseDouble(taxData[6]);
-        } else if (preferences.get_kiwiSaver().equals("5")){
+        } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.FIVE)){
         	_kiwiSaver = Double.parseDouble(taxData[6])*(5.0/4.0);
-        } else if (preferences.get_kiwiSaver().equals("6")){
+        } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.SIX)){
         	_kiwiSaver = Double.parseDouble(taxData[6])*(6.0/4.0);
-        } else if (preferences.get_kiwiSaver().equals("7")){
+        } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.SEVEN)){
         	_kiwiSaver = Double.parseDouble(taxData[6])*(7.0/4.0);
-        } else if (preferences.get_kiwiSaver().equals("8")) {
+        } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.EIGHT)) {
         	_kiwiSaver = Double.parseDouble(taxData[7]);
         }
         _nett = _grossIncome - _paye - _studentLoan - _kiwiSaver;

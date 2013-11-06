@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.ads.*;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
 import com.mcalpinedevelopment.calculatepay.employee.Employee;
 
 
@@ -24,7 +25,7 @@ public class CalculateActivity extends Activity{
 
     double _hours = 0;
     double _rate = 0;
-    String _paytype = "";
+//    EmployeeDetails.PayPeriod _paytype = null;
 
     /**
      * Constants
@@ -65,7 +66,7 @@ public class CalculateActivity extends Activity{
         Calculator calculator = new Calculator(hoursWorked, this);
         _hours = calculator.hours();
         _rate = calculator.rate();
-        _paytype = calculator.paytype();
+//        _paytype = calculator.paytype();
 
         // Set the text view as the activity layout
         setContentView(R.layout.calculated_view);

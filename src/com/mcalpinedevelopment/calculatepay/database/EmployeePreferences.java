@@ -2,52 +2,52 @@ package com.mcalpinedevelopment.calculatepay.database;
 
 public class EmployeePreferences {
 	private String _name;
-	private String _payPeriod;
-	private String _taxCode;
-	private String _kiwiSaver;
-	private String _studentLoan;
-	private String _hourlyPay;
+	private EmployeeDetails.PayPeriod _payPeriod;
+	private EmployeeDetails.TaxCode _taxCode;
+	private EmployeeDetails.KiwiSaver _kiwiSaver;
+	private EmployeeDetails.StudentLoan _studentLoan;
+	private double _hourlyPay;
 	
 	public void set_name(String _name) {
 		this._name = _name;
 	}
-	public void set_payPeriod(String _payPeriod) {
+	public void set_payPeriod(EmployeeDetails.PayPeriod _payPeriod) {
 		this._payPeriod = _payPeriod;
 	}
-	public void set_taxCode(String _taxCode) {
+	public void set_taxCode(EmployeeDetails.TaxCode _taxCode) {
 		this._taxCode = _taxCode;
 	}
-	public void set_kiwiSaver(String _kiwiSaver) {
+	public void set_kiwiSaver(EmployeeDetails.KiwiSaver _kiwiSaver) {
 		this._kiwiSaver = _kiwiSaver;
 	}
-	public void set_studentLoan(String _studentLoan) {
+	public void set_studentLoan(EmployeeDetails.StudentLoan _studentLoan) {
 		this._studentLoan = _studentLoan;
 	}
-	public void set_hourlyPay(String _hourlyPay) {
+	public void set_hourlyPay(double _hourlyPay) {
 		this._hourlyPay = _hourlyPay;
 	}
 	public String get_name() {
 		return _name;
 	}
-	public String get_payPeriod() {
+	public EmployeeDetails.PayPeriod get_payPeriod() {
 		return _payPeriod;
 	}
-	public String get_taxCode() {
+	public EmployeeDetails.TaxCode get_taxCode() {
 		return _taxCode;
 	}
-	public String get_kiwiSaver() {
+	public EmployeeDetails.KiwiSaver get_kiwiSaver() {
 		return _kiwiSaver;
 	}
-	public String get_studentLoan() {
+	public EmployeeDetails.StudentLoan get_studentLoan() {
 		return _studentLoan;
 	}
-	public String get_hourlyPay() {
+	public double get_hourlyPay() {
 		return _hourlyPay;
 	}
 	@Override
 	public boolean equals(Object obj) {
 		EmployeePreferences dM = (EmployeePreferences) obj;
-		if (	   this._hourlyPay.equals(dM._hourlyPay)
+		if (	   this._hourlyPay == dM._hourlyPay
 				&& this._name.equals(dM._name)
 				&& this._payPeriod.equals(dM._payPeriod)
 				&& this._taxCode.equals(dM._taxCode)
@@ -74,11 +74,11 @@ public class EmployeePreferences {
 	public static EmployeePreferences defaultValue() {
 		EmployeePreferences dM = new EmployeePreferences();
     	dM.set_name("Enter name");
-    	dM.set_payPeriod("Weekly");
-    	dM.set_taxCode("M");
-    	dM.set_kiwiSaver("None");
-    	dM.set_studentLoan("false");
-    	dM.set_hourlyPay("0.0");
+    	dM.set_payPeriod(EmployeeDetails.PayPeriod.WEEKLY);
+    	dM.set_taxCode(EmployeeDetails.TaxCode.M);
+    	dM.set_kiwiSaver(EmployeeDetails.KiwiSaver.ZERO);
+    	dM.set_studentLoan(EmployeeDetails.StudentLoan.FALSE);
+    	dM.set_hourlyPay(0.0);
     	return dM;
 	}
 	

@@ -72,17 +72,28 @@ public class EmployeeDatabase {
 			SQLiteDatabase db;
 			db =  openDatabase();
 			
-			ContentValues values = new ContentValues();
-			values.put(NAME, dM.get_name());
-			values.put(PAY_PERIOD, dM.get_payPeriod());
-			values.put(KIWI_SAVER, dM.get_kiwiSaver());
-			values.put(TAX_CODE, dM.get_taxCode());			
-			values.put(STUDENT_LOAN, dM.get_studentLoan());
-			values.put(HOURLY_PAY, dM.get_hourlyPay());
+			ContentValues values = putData(dM); //new ContentValues();
+//			values.put(NAME, dM.get_name());
+//			values.put(PAY_PERIOD, dM.get_payPeriod());
+//			values.put(KIWI_SAVER, dM.get_kiwiSaver());
+//			values.put(TAX_CODE, dM.get_taxCode());			
+//			values.put(STUDENT_LOAN, dM.get_studentLoan());
+//			values.put(HOURLY_PAY, dM.get_hourlyPay());
 
 			db.insert(TABLE_NAME, null, values);
 			
 			db.close(); // Always close the database
+		}
+		
+		private ContentValues putData(EmployeePreferences dM) {
+			ContentValues values = new ContentValues();
+			values.put(NAME, dM.get_name());
+			values.put(PAY_PERIOD, dM.get_payPeriod().toString());
+			values.put(KIWI_SAVER, dM.get_kiwiSaver().toString());
+			values.put(TAX_CODE, dM.get_taxCode().toString());			
+			values.put(STUDENT_LOAN, dM.get_studentLoan().toString());
+			values.put(HOURLY_PAY, Double.toString(dM.get_hourlyPay()));			
+			return values;
 		}
 		
 		public void updateData(EmployeePreferences dM) {
@@ -94,13 +105,13 @@ public class EmployeeDatabase {
 			SQLiteDatabase db;
 			db =  openDatabase();
 			
-			ContentValues values = new ContentValues();
-			values.put(NAME, dM.get_name());
-			values.put(PAY_PERIOD, dM.get_payPeriod());
-			values.put(KIWI_SAVER, dM.get_kiwiSaver());
-			values.put(TAX_CODE, dM.get_taxCode());			
-			values.put(STUDENT_LOAN, dM.get_studentLoan());
-			values.put(HOURLY_PAY, dM.get_hourlyPay());
+			ContentValues values = putData(dM); //new ContentValues();
+//			values.put(NAME, dM.get_name());
+//			values.put(PAY_PERIOD, dM.get_payPeriod().toString());
+//			values.put(KIWI_SAVER, dM.get_kiwiSaver().toString());
+//			values.put(TAX_CODE, dM.get_taxCode().toString());			
+//			values.put(STUDENT_LOAN, dM.get_studentLoan().toString());
+			values.put(HOURLY_PAY, Double.toString(dM.get_hourlyPay()));
 			
 			db.update(TABLE_NAME, values,NAME + "=" + "\'"+getName()+"\'", null);
 			
@@ -128,12 +139,14 @@ public class EmployeeDatabase {
 			
 			try {
 				dM.set_name(rows.getString(0));
-				dM.set_payPeriod(rows.getString(1));
-				dM.set_studentLoan(rows.getString(2));
-				dM.set_taxCode(rows.getString(3));
-				dM.set_kiwiSaver(rows.getString(4));
-				dM.set_hourlyPay(rows.getString(5));
+				dM.set_payPeriod(EmployeeDetails.parsePayPeriod(rows.getString(1)));
+				dM.set_studentLoan(EmployeeDetails.parseStudentLoan(rows.getString(2)));
+				dM.set_taxCode(EmployeeDetails.parseTaxCode(rows.getString(3)));
+				dM.set_kiwiSaver(EmployeeDetails.parseKiwiSaver(rows.getString(4)));
+				dM.set_hourlyPay(Double.parseDouble(rows.getString(5)));
 			} catch (CursorIndexOutOfBoundsException e) {
+			} catch (DetailParseException e) {
+				Log.e("DetailParseException", e.getMessage());
 			}
 			
 			db.close();
