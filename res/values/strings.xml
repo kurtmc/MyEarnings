@@ -3,7 +3,7 @@
 <resources>
     <string
             name="app_name"
-            >Calculate PAYE</string>
+            >My Earnings</string>
     <string
             name="action_settings"
             >Preferences</string>
