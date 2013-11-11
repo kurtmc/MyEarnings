@@ -18,7 +18,8 @@ public class PreferencesActivity extends Activity {
         super.onCreate(savedInstanceState);        
         
         // Instantiate PreferencesUI to handle the UI
-        PreferencesUI preferencesUI = new PreferencesUI(this);
+        @SuppressWarnings("unused")
+		PreferencesUI preferencesUI = new PreferencesUI(this);
     }
 
 

@@ -130,7 +130,6 @@ public class PreferencesUI {
         } else {
             rBVarKiwiSaver.setChecked(true);
             rBVarKiwiSaver.setText(dM.get_kiwiSaver()+" %");
-//            sBKiwiSaver.setProgress((int)((Double.parseDouble(dM.get_kiwiSaver())-1)*100.0/7.0));
             sBKiwiSaver.setProgress((int)(((dM.get_kiwiSaver().getValue())-1)*100.0/7.0));
         }
         
