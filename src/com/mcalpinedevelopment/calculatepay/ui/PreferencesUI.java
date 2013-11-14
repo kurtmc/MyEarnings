@@ -159,6 +159,11 @@ public class PreferencesUI {
      * Name, pay period, student loan, tax code, kiwi saver, hourly pay
      */
     private EmployeePreferences readEmployeeInfo() {   
+    	// If the old preferences file exists read it and convert to EmployeePreferences object then delete the file
+    	if (false) {
+    		// Read old file
+    	}
+    	
     	Log.d("myDatabase", "Reading database");
     	EmployeeDatabase db = EmployeeDatabase.getDatabase(_activity);
     	EmployeePreferences dM = db.getEmployeeDetails();
