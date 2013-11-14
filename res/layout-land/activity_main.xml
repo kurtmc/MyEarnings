@@ -15,21 +15,23 @@
             android:ems="10"
             android:id="@+id/editTextHoursWorked" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
             android:layout_marginLeft="17dp" android:layout_marginTop="15dp"/>
+
     <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calculate"
-            android:id="@+id/buttonCalculate" android:layout_alignParentBottom="true" android:layout_toRightOf="@+id/editTextHoursWorked"
-            android:layout_marginBottom="15dp"/>
+        android:id="@+id/buttonCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_toRightOf="@+id/editTextHoursWorked"
+        android:text="@string/calculate" />
+
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Amount of hours worked:"
-            android:id="@+id/textViewHoursWorked"
-            android:layout_alignParentTop="true" android:layout_alignLeft="@+id/editTextHoursWorked"/>
-    <Button style="?android:attr/buttonStyleSmall" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:text="Preferences" android:id="@+id/buttonPreferences"
-            android:textSize="10dp"
-            android:layout_alignParentTop="true" android:layout_alignParentRight="true"/>
+        android:id="@+id/textViewHoursWorked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextHoursWorked"
+        android:layout_alignParentTop="true"
+        android:text="@string/hours_worked"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </RelativeLayout>

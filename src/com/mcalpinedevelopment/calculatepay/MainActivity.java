@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
 
     //Declare fields for the GUI
     Button bCalculate;
-    Button bPreferences;
+    //Button bPreferences;
     EditText eTHoursWorked;
     EditText eTPayRate;
     RadioButton rBWeekly;
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 
         //Initialise fields, accessing GUI components
         bCalculate = (Button)findViewById(R.id.buttonCalculate);
-        bPreferences = (Button)findViewById(R.id.buttonPreferences);
+        //bPreferences = (Button)findViewById(R.id.buttonPreferences);
         eTHoursWorked = (EditText)findViewById(R.id.editTextHoursWorked);
         eTPayRate = (EditText)findViewById(R.id.editTextPayRate);
         rBWeekly = (RadioButton)findViewById(R.id.radioButtonWeekly);
@@ -76,11 +76,11 @@ public class MainActivity extends Activity {
 
 
         // On click listener for bPreferences, launchers PreferencesActivity
-        bPreferences.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startPreferencesActivity();
-            }
-        });
+//        bPreferences.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                startPreferencesActivity();
+//            }
+//        });
 
     }
 
