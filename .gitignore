@@ -26,3 +26,6 @@ proguard/
 *.ipr
 *.iws
 .idea/
+
+# Icon generation
+icon_generator/icons/*
