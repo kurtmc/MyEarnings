@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 
 public class MainActivity extends Activity {
 
@@ -17,12 +16,7 @@ public class MainActivity extends Activity {
 
     //Declare fields for the GUI
     Button bCalculate;
-    //Button bPreferences;
     EditText eTHoursWorked;
-    EditText eTPayRate;
-    RadioButton rBWeekly;
-    RadioButton rBFortnightly;
-    RadioButton rBMonthly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +26,7 @@ public class MainActivity extends Activity {
 
         //Initialise fields, accessing GUI components
         bCalculate = (Button)findViewById(R.id.buttonCalculate);
-        //bPreferences = (Button)findViewById(R.id.buttonPreferences);
         eTHoursWorked = (EditText)findViewById(R.id.editTextHoursWorked);
-        eTPayRate = (EditText)findViewById(R.id.editTextPayRate);
-        rBWeekly = (RadioButton)findViewById(R.id.radioButtonWeekly);
-        rBFortnightly = (RadioButton)findViewById(R.id.radioButtonFortnightly);
-        //rBMonthly = (RadioButton)findViewById(R.id.radioButtonMonthly);
 
         //Set on click listener for bCalculate, and only execute if something is typed in the EditText eTHoursWorked
         bCalculate.setOnClickListener(new View.OnClickListener() {
@@ -73,15 +62,6 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-
-
-        // On click listener for bPreferences, launchers PreferencesActivity
-//        bPreferences.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                startPreferencesActivity();
-//            }
-//        });
-
     }
 
     @Override
