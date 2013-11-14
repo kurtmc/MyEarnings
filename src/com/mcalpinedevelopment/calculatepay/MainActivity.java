@@ -85,6 +85,12 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, PreferencesActivity.class);
         startActivity(intent);
     }
+    
+    // Start About
+    private void startAboutActivity() {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
 
     //Overriding back button to exit app when click inside this activity
     @Override
@@ -107,6 +113,9 @@ public class MainActivity extends Activity {
             case R.id.action_settings:
                 startPreferencesActivity();
                 break;
+            case R.id.about:
+            	startAboutActivity();
+            	break;
         }
         return super.onOptionsItemSelected(item);
     }
