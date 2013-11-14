@@ -236,10 +236,13 @@ public class PreferencesUI {
 			}
 			
 			// Delete the file
-			File file = new File(FILENAME);
+			File file = new File(_activity.getFilesDir(),FILENAME);
             boolean deleted = file.delete();
-            if (deleted)
+            if (deleted) {
             	Log.d("Old preferences","The file was successfully deleted!!!!!!!!");
+            }
+            
+            return employeePrefs;
     	}
     	
     	Log.d("myDatabase", "Reading database");
