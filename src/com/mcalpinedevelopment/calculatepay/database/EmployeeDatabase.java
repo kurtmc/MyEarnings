@@ -1,5 +1,10 @@
 package com.mcalpinedevelopment.calculatepay.database;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -120,6 +125,100 @@ public class EmployeeDatabase {
 		}
 		
 		public EmployeePreferences getEmployeeDetails() {
+			// ########################################################################################################################
+	    	// If the old preferences file exists read it and convert to EmployeePreferences object then delete the file
+	    	String FILENAME = "preferences.txt";
+	    	
+	    	// Determine if the old preferences file exits
+	    	boolean fileExists = false;
+	    	try {
+	    		FileInputStream theFile = _context.openFileInput(FILENAME);
+	    		fileExists = true;
+	    		try {
+					theFile.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    	} catch (FileNotFoundException e) {
+	    	}
+	    	
+	    	if (fileExists) {
+	    		// Read old file  
+	    		String oldPreferences = "";
+				try {
+		            StringBuilder fileContent = new StringBuilder();
+		            FileInputStream fis = _context.openFileInput(FILENAME);
+
+		            byte[] buffer = new byte[1024];
+		            @SuppressWarnings("unused")
+					int length;
+		            while ((length = fis.read(buffer)) != -1) {
+		                fileContent.append(new String(buffer));
+		            }
+		            fis.close();
+
+		            oldPreferences = fileContent.toString();
+		            Log.d("Old preferences", oldPreferences);
+		         // Return default values if there is a problem
+		        } catch (FileNotFoundException e) {
+		        	Log.d("Old preferences", "FileNotFoundException");
+		        } catch (IOException e) {
+		        	Log.d("Old preferences", "IOException");
+		        }
+				
+				// Create EmployeePreferences object
+				String[] prefs = oldPreferences.split(",");
+				EmployeePreferences employeePrefs = new EmployeePreferences();
+				employeePrefs.set_name(prefs[0]);
+				try {
+					employeePrefs.set_payPeriod(EmployeeDetails.parsePayPeriod(prefs[1]));
+				} catch (DetailParseException e) {
+					employeePrefs.set_payPeriod(EmployeeDetails.PayPeriod.WEEKLY);
+				}
+				try {
+					employeePrefs.set_studentLoan(EmployeeDetails.parseStudentLoan(prefs[2]));
+				} catch (DetailParseException e) {
+					employeePrefs.set_studentLoan(EmployeeDetails.StudentLoan.FALSE);
+				}
+				try {
+					employeePrefs.set_taxCode(EmployeeDetails.parseTaxCode(prefs[3]));
+				} catch (DetailParseException e) {
+					employeePrefs.set_taxCode(EmployeeDetails.TaxCode.M);
+				}
+				try {
+					employeePrefs.set_kiwiSaver(EmployeeDetails.parseKiwiSaver(prefs[4]));
+				} catch (DetailParseException e) {
+					employeePrefs.set_kiwiSaver(EmployeeDetails.KiwiSaver.ZERO);
+				}
+				try {
+					employeePrefs.set_hourlyPay(Double.parseDouble(prefs[5]));
+				} catch (NumberFormatException e) {
+					employeePrefs.set_hourlyPay(0.0);
+				}
+				
+				// Delete the file
+				File file = new File(_context.getFilesDir(),FILENAME);
+	            boolean deleted = file.delete();
+	            if (deleted) {
+	            	Log.d("Old preferences","The file was successfully deleted!!!!!!!!");
+	            }
+	            
+	            return employeePrefs;
+	    	}	    	
+	    	// ########################################################################################################################
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			// Proper database code
 			SQLiteDatabase db;
 			db =  openDatabase();		
 			Cursor rows = null;
