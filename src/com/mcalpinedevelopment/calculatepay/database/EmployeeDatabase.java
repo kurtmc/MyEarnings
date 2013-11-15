@@ -204,6 +204,9 @@ public class EmployeeDatabase {
 	            	Log.d("Old preferences","The file was successfully deleted!!!!!!!!");
 	            }
 	            
+	            // First update the data in the database then return the value
+	            updateData(employeePrefs);
+	            
 	            return employeePrefs;
 	    	}	    	
 	    	// ########################################################################################################################
