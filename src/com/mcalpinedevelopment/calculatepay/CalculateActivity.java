@@ -22,22 +22,6 @@ public class CalculateActivity extends Activity{
     private AdView adView;
     final private String MY_AD_UNIT_ID = "a151adb2d8447b7";
 
-    double _hours = 0;
-    double _rate = 0;
-//    EmployeeDetails.PayPeriod _paytype = null;
-
-    /**
-     * Constants
-     */
-    final double TAXRATE1 = 0.105;
-    final double TAXRATE2 = 0.175;
-    final double TAXRATE3 = 0.30;
-    final double TAXRATE4 = 0.33;
-    final double TAXRATE5 = 0.45;
-    final double TAXBRACKET1 = 14000;
-    final double TAXBRACKET2 = 48000;
-    final double TAXBRACKET3 = 70000;
-
     TextView tvDataToDisplay0;
     TextView tvDataToDisplay1;
     TextView tvDataToDisplay2;
@@ -58,14 +42,7 @@ public class CalculateActivity extends Activity{
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // Get the message from the intent
-        Intent intent = getIntent();
-        String hoursWorked = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         
-        Calculator calculator = new Calculator(hoursWorked, this);
-        _hours = calculator.hours();
-        _rate = calculator.rate();
-//        _paytype = calculator.paytype();
 
         // Set the text view as the activity layout
         setContentView(R.layout.calculated_view);
@@ -75,6 +52,10 @@ public class CalculateActivity extends Activity{
         tvDataToDisplay3 = (TextView)findViewById(R.id.dataToDisplay3);
         tvDataToDisplay4 = (TextView)findViewById(R.id.dataToDisplay4);
         
+        // Get the message from the intent
+        Intent intent = getIntent();
+        String hoursWorked = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        
         // Instantiate Employee object
         Employee employee = new Employee(hoursWorked, this);
         
@@ -83,7 +64,6 @@ public class CalculateActivity extends Activity{
         tvDataToDisplay2.setText(employee.studentLoan());
         tvDataToDisplay3.setText(employee.kiwiSaver());
         tvDataToDisplay4.setText(employee.nett());
-
 
         
         // === ADVERTISEMENT ========================================================
@@ -97,8 +77,6 @@ public class CalculateActivity extends Activity{
         // Initiate a generic request to load it with an ad
         adView.loadAd(new AdRequest());
         // === ADVERTISEMENT =======================================================*/
-
-
     }
     
 

@@ -1,6 +1,5 @@
 package com.mcalpinedevelopment.calculatepay;
 
-import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
 import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
 import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
 
@@ -15,8 +14,6 @@ public class Calculator {
 	// Fields to store values
 	private double _hours;
 	private double _rate;
-	private EmployeeDetails.PayPeriod _payPeriod;
-
 	
 	/**
 	 * @param hoursWorked
@@ -46,8 +43,7 @@ public class Calculator {
         } catch (NullPointerException e) {
         	_rate = 0.0;
         }        
-        
-        _payPeriod = dM.get_payPeriod();
+
 	}
 	
 	public double rate() {
@@ -56,7 +52,5 @@ public class Calculator {
 	public double hours() {
 		return _hours;
 	}
-	public EmployeeDetails.PayPeriod paytype() {
-		return _payPeriod;
-	}
+	
 }
