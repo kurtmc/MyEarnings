@@ -134,8 +134,7 @@ public class PreferencesUI {
             rBKSNone.setChecked(true);            
         } else {
             rBVarKiwiSaver.setChecked(true);
-            rBVarKiwiSaver.setText(dM.get_kiwiSaver()+" %");
-//            sBKiwiSaver.setProgress((int)((Double.parseDouble(dM.get_kiwiSaver())-1)*100.0/7.0));
+            rBVarKiwiSaver.setText((int)dM.get_kiwiSaver().getValue()+" %");
             sBKiwiSaver.setProgress((int)(((dM.get_kiwiSaver().getValue())-1)*100.0/7.0));
         }
         
