@@ -4,7 +4,7 @@
 
     <string name="app_name">My Earnings</string>
     <string name="action_settings">Preferences</string>
-    <string name="hours_worked">Amount of hours worked:</string>
+    <string name="hours_worked">Enter hours worked:</string>
     <string name="calculate">Calculate</string>
     <string name="calculate_activity">Calculate</string>
     <string name="name">Name:</string>
