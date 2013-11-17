@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:hint="@string/hours_worked" />
+        android:hint="@string/hours_worked"
+        android:imeActionLabel="Calculate" />
 
     <Button
         android:id="@+id/buttonCalculate"
