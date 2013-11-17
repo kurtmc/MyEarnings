@@ -1,10 +1,5 @@
 package com.mcalpinedevelopment.calculatepay.ui;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import com.mcalpinedevelopment.calculatepay.MainActivity;
 import com.mcalpinedevelopment.calculatepay.R;
 import com.mcalpinedevelopment.calculatepay.database.DetailParseException;
