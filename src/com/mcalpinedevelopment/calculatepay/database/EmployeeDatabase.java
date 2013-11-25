@@ -5,13 +5,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import com.mcalpinedevelopment.calculatepay.PreferencesActivity;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
+import android.widget.Toast;
 
 public class EmployeeDatabase {
 		// Activity reference
@@ -247,11 +251,19 @@ public class EmployeeDatabase {
 				dM.set_kiwiSaver(EmployeeDetails.parseKiwiSaver(rows.getString(4)));
 				dM.set_hourlyPay(Double.parseDouble(rows.getString(5)));
 			} catch (CursorIndexOutOfBoundsException e) {
+				Log.e("CursorIndexOutOfBoundsException", e.getMessage());
+				Log.d("myDatabase","It's null!");
+				// Should probably do something to sort that out
+				db.close();
+				Toast.makeText(_context, "You must update your preferences, use the context menu.", Toast.LENGTH_SHORT).show();
+				return EmployeePreferences.defaultValue();				
 			} catch (DetailParseException e) {
-				Log.e("DetailParseException", e.getMessage());
+				Log.e("DetailParseException", e.getMessage());				
 			}
 			
 			db.close();
+			
+//			
 			
 			return dM;
 		}
