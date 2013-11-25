@@ -47,7 +47,7 @@ public class TaxCalculator {
             is = _context.getResources().openRawResource(R.raw.weeklypaye);
             readFactor = 1;
         } else {
-            is = _context.getResources().openRawResource(R.raw.fortnighlypaye);
+            is = _context.getResources().openRawResource(R.raw.fortnightlypaye);
             readFactor = 2;
         }
 
@@ -76,6 +76,31 @@ public class TaxCalculator {
 	
 	/**
 	 * Assigns the fields the values in accordence to the employees preferences and their gross income
+	 * 
+	 * At the moment the two files are formated as follows:
+	 * 
+	 * Notes:
+	 * ML does not exist anymore
+	 * M, ME and ML are tax codes
+	 * SL stands for student loan
+	 * 3%, 4% and 8% are Kiwi Saver amounts
+	 * 
+	 * weeklypaye.csv:
+	 * 
+	 * Earnings,M,ME,ML,SL,3%,4%,8%
+	 * 1,0.12,0.12,0.12,0,0.03,0.04,0.08
+	 * 2,0.24,0.24,0.24,0,0.06,0.08,0.16
+	 * 3,0.36,0.36,0.36,0,0.09,0.12,0.24
+	 * 4,0.48,0.48,0.48,0,0.12,0.16,0.32
+	 * 5,0.61,0.61,0.61,0,0.15,0.2,0.4
+	 * 
+	 * fortnightly.csv:
+	 * Earnings,M,ME,ML,SL,3%,4%,8%
+	 * 2,0.24,0.24,0.24,0,0.06,0.08,0.16
+	 * 4,0.48,0.48,0.48,0,0.12,0.16,0.32
+	 * 6,0.72,0.72,0.72,0,0.18,0.24,0.48
+	 * 8,0.96,0.96,0.96,0,0.24,0.32,0.64
+	 * 10,1.22,1.22,1.22,0,0.3,0.4,0.8
 	 */
 	private void computePayslip() {
 		// Get the employee preferences
@@ -97,11 +122,11 @@ public class TaxCalculator {
         _kiwiSaver = 0;
         if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.ZERO)) {
         } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.ONE)){
-        	_kiwiSaver = Double.parseDouble(taxData[5])/2.0;
+        	_kiwiSaver = Double.parseDouble(taxData[5])/3.0;
         } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.TWO)) {
-        	_kiwiSaver = Double.parseDouble(taxData[5]);
+        	_kiwiSaver = Double.parseDouble(taxData[5])*(2.0/3.0);
         } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.THREE)){
-        	_kiwiSaver = Double.parseDouble(taxData[5])*(3.0/2.0);
+        	_kiwiSaver = Double.parseDouble(taxData[5]);
         } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.FOUR)) {
         	_kiwiSaver = Double.parseDouble(taxData[6]);
         } else if (preferences.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.FIVE)){
