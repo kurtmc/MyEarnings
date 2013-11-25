@@ -37,7 +37,7 @@
         </activity>
         <activity
             android:name="com.mcalpinedevelopment.calculatepay.PreferencesActivity"
-            android:label="@string/calculate_activity"
+            android:label="@string/action_settings"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustPan" >
             <meta-data
