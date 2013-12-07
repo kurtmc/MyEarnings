@@ -2,10 +2,10 @@ package com.mcalpinedevelopment.calculatepay.ui;
 
 import com.mcalpinedevelopment.calculatepay.MainActivity;
 import com.mcalpinedevelopment.calculatepay.R;
-import com.mcalpinedevelopment.calculatepay.database.DetailParseException;
-import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
-import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
-import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
+import com.implementation.DetailParseException;
+import com.implementation.EmployeeDatabase;
+import com.implementation.EmployeeDetails;
+import com.implementation.EmployeePreferences;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
