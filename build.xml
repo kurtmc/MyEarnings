@@ -1,0 +1,7 @@
+<project>
+    <target name="copyDependencies">
+      <copy todir="./src/com/mcalpinedevelopment/calculatepay/database">
+	    <fileset dir="../SimpleAndroidDatabase/src/com/mcalpinedevelopment/calculatepay/database"></fileset>
+	  </copy>
+    </target>
+</project>

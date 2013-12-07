@@ -1,7 +1,7 @@
 package com.mcalpinedevelopment.calculatepay;
 
-import com.implementation.EmployeePreferences;
-import com.implementation.EmployeeDatabase;
+import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
 
 import android.content.Context;
 

@@ -8,9 +8,9 @@ import java.io.InputStreamReader;
 import android.content.Context;
 
 import com.mcalpinedevelopment.calculatepay.R;
-import com.implementation.EmployeeDatabase;
-import com.implementation.EmployeeDetails;
-import com.implementation.EmployeePreferences;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
+import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
 
 public class TaxCalculator {
 
