@@ -23,18 +23,14 @@
                 android:visibility="visible"
                 android:useDefaultMargins="false"
                 >
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name"
-                    android:id="@+id/textView"
-                    android:layout_gravity="left"/>
             <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editTextName" android:layout_gravity="center_horizontal|top"
+                    android:id="@+id/editTextName" 
+                    android:layout_gravity="center_horizontal|top"
+                    android:hint="@string/name"
                     />
 
             <TextView
@@ -110,6 +106,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/seekBarKiwiSaver"
                     android:layout_gravity="left|center_vertical"/>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/student_loan" />
 
             <CheckBox
                     android:layout_width="wrap_content"

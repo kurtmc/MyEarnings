@@ -7,19 +7,19 @@
     <string name="hours_worked">Enter hours worked:</string>
     <string name="calculate">Calculate</string>
     <string name="calculate_activity">Calculate</string>
-    <string name="name">Name:</string>
-    <string name="pay_period">Pay period:</string>
+    <string name="name">Name</string>
+    <string name="pay_period">How often are you paid?</string>
     <string name="weekly">Weekly</string>
     <string name="fortnightly">Fortnightly</string>
     <string name="monthly">Monthly</string>
-    <string name="tax_code">Tax code:</string>
+    <string name="tax_code">What is your tax code?</string>
     <string name="m">M</string>
     <string name="me">ME</string>
     <string name="ml">ML</string>
-    <string name="kiwi_saver">Kiwi Saver:</string>
+    <string name="kiwi_saver">What percentage of your pay goes to Kiwi Saver?</string>
     <string name="none">None</string>
     <string name="sl">SL (Student Loan)</string>
-    <string name="pay_rate">Hourly pay:</string>
+    <string name="pay_rate">How much are you paid per hour?</string>
     <string name="save">Save</string>
     <string name="gross">Gross : $</string>
     <string name="paye">PAYE : $</string>
@@ -29,5 +29,6 @@
     <string name="title_activity_about">About</string>
     <string name="hello_world">Hello world!</string>
     <string name="about">About</string>
+    <string name="student_loan">Do you have a student loan?</string>
 
 </resources>
