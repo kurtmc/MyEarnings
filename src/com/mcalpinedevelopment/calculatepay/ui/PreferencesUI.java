@@ -65,43 +65,48 @@ public class PreferencesUI {
 
         sBKiwiSaver = (SeekBar)_activity.findViewById(R.id.seekBarKiwiSaver);
         rBVarKiwiSaver = (RadioButton)_activity.findViewById(R.id.radioButtonVaribaleKS);
-
-        //Set up sBKiwiSaver (SeekBar) to change the percentage of kiwisaver to be paid
-        sBKiwiSaver.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                double segment = 100/7;
-                if (progress <= segment/2) {
-                    rBVarKiwiSaver.setText("1 %");
-                } else if (progress > segment/2 && progress <= 3*segment/2) {
-                    rBVarKiwiSaver.setText("2 %");
-                } else if (progress > 3*segment/2 && progress <= 5*segment/2) {
-                    rBVarKiwiSaver.setText("3 %");
-                } else if (progress > 5*segment/2 && progress <= 7*segment/2) {
-                    rBVarKiwiSaver.setText("4 %");
-                } else if (progress > 7*segment/2 && progress <= 9*segment/2) {
-                    rBVarKiwiSaver.setText("5 %");
-                }else if (progress > 9*segment/2 && progress <= 11*segment/2) {
-                    rBVarKiwiSaver.setText("6 %");
-                }else if (progress > 11*segment/2 && progress <= 13*segment/2) {
-                    rBVarKiwiSaver.setText("7 %");
-                }else if (progress > 13*segment/2 && progress <= 14*segment/2) {
-                    rBVarKiwiSaver.setText("8 %");
-                }
+        
+        bSave.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                writePreferences();
+                goBackToMainView(v);
             }
-
-			@Override
-			public void onStartTrackingTouch(SeekBar arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar arg0) {
-				// TODO Auto-generated method stub
-				
-			}
         });
+        
+      //Set up sBKiwiSaver (SeekBar) to change the percentage of kiwisaver to be paid
+        sBKiwiSaver.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+	        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+	            double segment = 100/7;
+	            if (progress <= segment/2) {
+	                rBVarKiwiSaver.setText("1 %");
+	            } else if (progress > segment/2 && progress <= 3*segment/2) {
+	                rBVarKiwiSaver.setText("2 %");
+	            } else if (progress > 3*segment/2 && progress <= 5*segment/2) {
+	                rBVarKiwiSaver.setText("3 %");
+	            } else if (progress > 5*segment/2 && progress <= 7*segment/2) {
+	                rBVarKiwiSaver.setText("4 %");
+	            } else if (progress > 7*segment/2 && progress <= 9*segment/2) {
+	                rBVarKiwiSaver.setText("5 %");
+	            }else if (progress > 9*segment/2 && progress <= 11*segment/2) {
+	                rBVarKiwiSaver.setText("6 %");
+	            }else if (progress > 11*segment/2 && progress <= 13*segment/2) {
+	                rBVarKiwiSaver.setText("7 %");
+	            }else if (progress > 13*segment/2 && progress <= 14*segment/2) {
+	                rBVarKiwiSaver.setText("8 %");
+	            }
+	        }
+	        //Not used
+			@Override
+			public void onStartTrackingTouch(SeekBar arg0) { }
+			@Override
+			public void onStopTrackingTouch(SeekBar arg0) {	} 
+		});
+
+        setActivityValues();
+	}
+    
+    private void setActivityValues() {
+    	
 
         //Setup preferences from previous input
         EmployeePreferences dM = readEmployeeInfo();
@@ -145,13 +150,7 @@ public class PreferencesUI {
         }    
      // #############################################
 
-        bSave.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                writePreferences();
-                goBackToMainView(v);
-            }
-        });		
-	}
+    }
     
     /**
      * @return String int the format
