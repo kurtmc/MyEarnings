@@ -64,14 +64,22 @@
                     android:layout_height="wrap_content"
                     android:textOn="@string/monthly"
                     android:textOff="@string/monthly" />
-                
-                <ImageButton 
-                    android:id="@+id/bHelpPayPeriod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/help"
-                    android:src="@android:drawable/ic_dialog_info"
-                    android:contentDescription="@string/help"/>
+
+				<RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+
+	                <ImageButton
+	                    android:id="@+id/bHelpPayPeriod"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:contentDescription="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:text="@string/help" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -112,14 +120,21 @@
                     android:layout_height="wrap_content"
                     android:textOn="@string/me"
                     android:textOff="@string/me" />
-                
-                <ImageButton 
-                    android:id="@+id/bHelpTaxCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/help"
-                    android:src="@android:drawable/ic_dialog_info"
-                    android:contentDescription="@string/help"/>
+                <RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+
+	                <ImageButton
+	                    android:id="@+id/bHelpTaxCode"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:contentDescription="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:text="@string/help" />
+
+	            </RelativeLayout>
 
             </LinearLayout>
             <RadioGroup
@@ -155,13 +170,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
-            <ImageButton 
-                    android:id="@+id/bHelpKiwiSaver"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/help"
-                    android:src="@android:drawable/ic_dialog_info"
-                    android:contentDescription="@string/help"/>
+            <RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+	            <ImageButton 
+	                    android:id="@+id/bHelpKiwiSaver"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:text="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:contentDescription="@string/help"/>
+	        </RelativeLayout>
             </LinearLayout>
             
             
@@ -202,14 +223,19 @@
                     android:layout_height="wrap_content"
                     android:textOn="@string/yes"
                     android:textOff="@string/no" />
-                
-                <ImageButton 
-                    android:id="@+id/bHelpStudentLoan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/help"
-                    android:src="@android:drawable/ic_dialog_info"
-                    android:contentDescription="@string/help"/>
+                <RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+	                <ImageButton 
+	                    android:id="@+id/bHelpStudentLoan"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:text="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:contentDescription="@string/help"/>
+	            </RelativeLayout>
                 
              </LinearLayout>
 
@@ -224,12 +250,29 @@
                     android:layout_height="wrap_content"
                     android:text="@string/pay_rate"
                     android:id="@+id/textView5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
             <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:ems="10"
                     android:id="@+id/editTextPayRate" android:layout_gravity="fill_horizontal|left" />
+            	<RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+	                <ImageButton 
+	                    android:id="@+id/bHelpPayRate"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:text="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:contentDescription="@string/help"/>
+	            </RelativeLayout>
+            </LinearLayout>
 
             <Button
                     android:layout_width="fill_parent"
