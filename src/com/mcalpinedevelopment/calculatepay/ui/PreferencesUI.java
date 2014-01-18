@@ -1,5 +1,8 @@
 package com.mcalpinedevelopment.calculatepay.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mcalpinedevelopment.calculatepay.MainActivity;
 import com.mcalpinedevelopment.calculatepay.R;
 import com.mcalpinedevelopment.calculatepay.database.DetailParseException;
@@ -14,30 +17,50 @@ import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.NumberPicker;
-import android.widget.RadioButton;
-import android.widget.SeekBar;
+import android.widget.ToggleButton;
 
-public class PreferencesUI {
-	private EditText eTName;
-	private RadioButton rBWeekly;
-	private RadioButton rBFortnightly;
-	private RadioButton rBMonthly;
-	private CheckBox cBSL;
-	private RadioButton rBM;
-	private RadioButton rBME;
-	private RadioButton rBML;
-	private RadioButton rBKSNone;
-
-	private Button bSave;
-	private EditText eTPayRate;
-
-	private SeekBar sBKiwiSaver;
-	private RadioButton rBVarKiwiSaver;
+public class PreferencesUI {	
 	
+	// Name	
+	private EditText eTName;
+	
+	// Pay period buttons
+	private ToggleButton tbWeekly;
+	private ToggleButton tbFortnightly;
+	private ToggleButton tbMonthly;
+	private ImageButton ibPayPeriodHelp;
+	
+	// Tax code buttons
+	private ToggleButton tbTaxCodeM;
+	private ToggleButton tbTaxCodeME;
+	private ImageButton ibTaxCodeHelp;
+	
+	
+	// Kiwi Saver widgets
 	private NumberPicker npKiwiSaver;
+	private ImageButton ibKiwiSaverHelp;
+	
+	//Student Loan buttons
+	private ToggleButton tbStudentLoan;
+	private ImageButton ibStudentLoanHelp;
+	
+	// Pay rate widgets
+	private EditText eTPayRate;
+	private ImageButton ibPayRateHelp;
+	
+	//Save button
+	private Button bSave;
+	
+	// Manage pay period buttons list
+	private List<ToggleButton> _listOfPayPeriodButtons;
+	
+	// Manage Tax code buttons list
+	private List<ToggleButton> _listOfTaxCodeButtons;
 	
     private Activity _activity;
     
@@ -52,22 +75,9 @@ public class PreferencesUI {
         }
 
         _activity.setContentView(R.layout.preferences);
-
-        //Widget assignments
-        eTName = (EditText)_activity.findViewById(R.id.editTextName);
-        rBWeekly = (RadioButton)_activity.findViewById(R.id.radioButtonWeekly);
-        rBFortnightly = (RadioButton)_activity.findViewById(R.id.radioButtonFortnightly);
-        //rBMonthly = (RadioButton)_activity.findViewById(R.id.radioButtonMonthly);
-        cBSL = (CheckBox)_activity.findViewById(R.id.checkBoxSL);
-        rBM = (RadioButton)_activity.findViewById(R.id.radioButtonM);
-        rBME = (RadioButton)_activity.findViewById(R.id.radioButtonME);
-        rBML = (RadioButton)_activity.findViewById(R.id.radioButtonML);
-        rBKSNone = (RadioButton)_activity.findViewById(R.id.radioButtonKSNone);
-        bSave = (Button)_activity.findViewById(R.id.buttonSave);
-        eTPayRate = (EditText)_activity.findViewById(R.id.editTextPayRate);
-
-        sBKiwiSaver = (SeekBar)_activity.findViewById(R.id.seekBarKiwiSaver);
-        rBVarKiwiSaver = (RadioButton)_activity.findViewById(R.id.radioButtonVaribaleKS);
+        
+        initialiseWidgets();
+        manageWidgets();
         
         npKiwiSaver = (NumberPicker)_activity.findViewById(R.id.npKiwiSaver);
         npKiwiSaver.setMaxValue(8);
@@ -80,83 +90,138 @@ public class PreferencesUI {
             }
         });
         
-      //Set up sBKiwiSaver (SeekBar) to change the percentage of kiwisaver to be paid
-        sBKiwiSaver.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-	        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-	            double segment = 100/7;
-	            if (progress <= segment/2) {
-	                rBVarKiwiSaver.setText("1 %");
-	            } else if (progress > segment/2 && progress <= 3*segment/2) {
-	                rBVarKiwiSaver.setText("2 %");
-	            } else if (progress > 3*segment/2 && progress <= 5*segment/2) {
-	                rBVarKiwiSaver.setText("3 %");
-	            } else if (progress > 5*segment/2 && progress <= 7*segment/2) {
-	                rBVarKiwiSaver.setText("4 %");
-	            } else if (progress > 7*segment/2 && progress <= 9*segment/2) {
-	                rBVarKiwiSaver.setText("5 %");
-	            }else if (progress > 9*segment/2 && progress <= 11*segment/2) {
-	                rBVarKiwiSaver.setText("6 %");
-	            }else if (progress > 11*segment/2 && progress <= 13*segment/2) {
-	                rBVarKiwiSaver.setText("7 %");
-	            }else if (progress > 13*segment/2 && progress <= 14*segment/2) {
-	                rBVarKiwiSaver.setText("8 %");
-	            }
-	        }
-	        //Not used
-			@Override
-			public void onStartTrackingTouch(SeekBar arg0) { }
-			@Override
-			public void onStopTrackingTouch(SeekBar arg0) {	} 
-		});
 
         setActivityValues();
 	}
     
-    private void setActivityValues() {
-    	
+    private void manageWidgets() {
+    	// Pay period
+		tbWeekly.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-        //Setup preferences from previous input
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				updateToggleButtons(buttonView, isChecked, _listOfPayPeriodButtons);
+			}});
+		
+		tbFortnightly.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				updateToggleButtons(buttonView, isChecked, _listOfPayPeriodButtons);
+			}});
+		
+		tbMonthly.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				updateToggleButtons(buttonView, isChecked, _listOfPayPeriodButtons);
+			}});
+		
+		// Tax code
+		tbTaxCodeM.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				updateToggleButtons(buttonView, isChecked, _listOfTaxCodeButtons);
+			}});
+		tbTaxCodeME.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				updateToggleButtons(buttonView, isChecked, _listOfTaxCodeButtons);
+			}});
+		
+	}
+    
+    private void updateToggleButtons(CompoundButton buttonView, boolean isChecked, List<ToggleButton> listOfManagedButtons) {
+    	if (isChecked) { // If it is checked set the others to false
+			for (ToggleButton b : listOfManagedButtons ) {					
+					if (buttonView.equals(b)) {
+						
+					} else {
+						b.setChecked(false);
+					}
+				} 
+			} else { // Else check that atleast another is checked else set to checked
+				boolean anotherChecked = false;
+				for (ToggleButton b : listOfManagedButtons ) {
+					if (b.isChecked()) {
+						anotherChecked = true;
+					}
+				}
+				if (!anotherChecked) {
+					buttonView.setChecked(true);
+				}
+			}
+    }
+
+	private void initialiseWidgets() {
+    	
+    	// Name
+    	eTName = (EditText)_activity.findViewById(R.id.editTextName);
+    	
+    	// Pay period buttons
+    	tbWeekly = (ToggleButton)_activity.findViewById(R.id.tbWeekly);
+    	tbFortnightly = (ToggleButton)_activity.findViewById(R.id.tbFortnightly);
+    	tbMonthly = (ToggleButton)_activity.findViewById(R.id.tbMonthly);
+    	ibPayPeriodHelp = (ImageButton)_activity.findViewById(R.id.bHelpPayPeriod);
+    	
+    	// Manage pay period list
+    	_listOfPayPeriodButtons = new ArrayList<ToggleButton>();
+    	_listOfPayPeriodButtons.add(tbWeekly);
+    	_listOfPayPeriodButtons.add(tbFortnightly);
+    	_listOfPayPeriodButtons.add(tbMonthly);
+    	
+    	// Tax code buttons
+    	tbTaxCodeM = (ToggleButton)_activity.findViewById(R.id.tbTaxCodeM);
+    	tbTaxCodeME = (ToggleButton)_activity.findViewById(R.id.tbTaxCodeME);
+    	ibTaxCodeHelp = (ImageButton)_activity.findViewById(R.id.bHelpTaxCode);
+    	
+    	_listOfTaxCodeButtons = new ArrayList<ToggleButton>();
+    	_listOfTaxCodeButtons.add(tbTaxCodeM);
+    	_listOfTaxCodeButtons.add(tbTaxCodeME);
+    	
+    	
+    	
+    	
+    	// Kiwi Saver widgets
+    	npKiwiSaver = (NumberPicker)_activity.findViewById(R.id.npKiwiSaver);
+    	ibKiwiSaverHelp = (ImageButton)_activity.findViewById(R.id.bHelpKiwiSaver);
+    	
+    	//Student Loan buttons
+    	tbStudentLoan = (ToggleButton)_activity.findViewById(R.id.tbStudentLoan);
+    	ibStudentLoanHelp = (ImageButton)_activity.findViewById(R.id.bHelpStudentLoan);
+    	
+    	// Pay rate widgets
+    	eTPayRate = (EditText)_activity.findViewById(R.id.editTextPayRate);
+    	ibPayRateHelp = (ImageButton)_activity.findViewById(R.id.bHelpPayRate);
+    	
+    	// Save button
+    	bSave = (Button)_activity.findViewById(R.id.buttonSave);
+    }
+    
+    private void setActivityValues() {
+    	//Setup preferences from previous input
         EmployeePreferences dM = readEmployeeInfo();
         eTName.setText(dM.get_name());
         if (dM.get_payPeriod().equals(EmployeeDetails.PayPeriod.WEEKLY)) {
-            rBWeekly.setChecked(true);
+            tbWeekly.setChecked(true);
         } else if (dM.get_payPeriod().equals(EmployeeDetails.PayPeriod.FORTNIGHTLY)) {
-            rBFortnightly.setChecked(true);
+            tbFortnightly.setChecked(true);
         } else if (dM.get_payPeriod().equals(EmployeeDetails.PayPeriod.MONTHLY)) {
-            rBMonthly.setChecked(true);
+            tbMonthly.setChecked(true);
         }
         if (dM.get_studentLoan().equals(EmployeeDetails.StudentLoan.TRUE)) {
-            cBSL.setChecked(true);
+            tbStudentLoan.setChecked(true);
         } else {
-            cBSL.setChecked(false);
+        	tbStudentLoan.setChecked(false);
         }
         if (dM.get_taxCode().equals(EmployeeDetails.TaxCode.M)) {
-            rBM.setChecked(true);
+            tbTaxCodeM.setChecked(true);
         } else if (dM.get_taxCode().equals(EmployeeDetails.TaxCode.ME)) {
-            rBME.setChecked(true);
-        } else if (dM.get_taxCode().equals(EmployeeDetails.TaxCode.ML)) {
-            rBML.setChecked(true);
+        	tbTaxCodeME.setChecked(true);
         }
-        if (dM.get_kiwiSaver().equals(EmployeeDetails.KiwiSaver.ZERO)) {
-            rBKSNone.setChecked(true);            
-        } else {
-            rBVarKiwiSaver.setChecked(true);
-            rBVarKiwiSaver.setText((int)dM.get_kiwiSaver().getValue()+" %");
-            sBKiwiSaver.setProgress((int)(((dM.get_kiwiSaver().getValue())-1)*100.0/7.0));
-        }
-        
-        // #############################################
-        // Need to re-evalute this block
-        try {
-//        	Double.parseDouble(dM.get_hourlyPay());
-        	eTPayRate.setText(Double.toString(dM.get_hourlyPay()));
-        } catch (NumberFormatException e) {
-        	eTPayRate.setText("0.0");
-        } catch (NullPointerException e) {
-        	eTPayRate.setText("0.0");
-        }    
-     // #############################################
-
+        npKiwiSaver.setValue((int)dM.get_kiwiSaver().getValue());
     }
     
     /**
@@ -177,45 +242,35 @@ public class PreferencesUI {
     private void writePreferences() {    	
 		String name = eTName.getText().toString();
 		EmployeeDetails.PayPeriod payPeriod = null;
-		if (rBWeekly.isChecked()) {
+		if (tbWeekly.isChecked()) {
         	payPeriod = EmployeeDetails.PayPeriod.WEEKLY;
-        } else if (rBFortnightly.isChecked()) {
+        } else if (tbFortnightly.isChecked()) {
         	payPeriod = EmployeeDetails.PayPeriod.FORTNIGHTLY;
-        } else if (rBMonthly.isChecked()) {
+        } else if (tbMonthly.isChecked()) {
         	payPeriod = EmployeeDetails.PayPeriod.MONTHLY;
         }
-
+		
 		EmployeeDetails.StudentLoan studentLoan = null;
-        if (cBSL.isChecked()) {
+        if (tbStudentLoan.isChecked()) {
         	studentLoan = EmployeeDetails.StudentLoan.TRUE;
         } else {
         	studentLoan = EmployeeDetails.StudentLoan.FALSE;
         }
-        
+      
         EmployeeDetails.TaxCode taxCode = null;
-        if (rBM.isChecked()) {
+        if (tbTaxCodeM.isChecked()) {
         	taxCode = EmployeeDetails.TaxCode.M;
-        } else if (rBME.isChecked()) {
+        } else if (tbTaxCodeME.isChecked()) {
         	taxCode = EmployeeDetails.TaxCode.ME;
-        } else if (rBML.isChecked()) {
-        	taxCode = EmployeeDetails.TaxCode.ML;
-        } 
+        }
         
         EmployeeDetails.KiwiSaver kiwiSaver = null;
-        if (rBKSNone.isChecked()) {
+        try {
+            kiwiSaver = EmployeeDetails.parseKiwiSaver(npKiwiSaver.getValue());
+        } catch (DetailParseException e) {
         	kiwiSaver = EmployeeDetails.KiwiSaver.ZERO;
-        } else {
-            //This is really a quick fix
-            //So you should probably go and fix the problem where you can potentially save a 0 length string
-            //as your kiwisaver value
-            try {
-                kiwiSaver = EmployeeDetails.parseKiwiSaver(rBVarKiwiSaver.getText().charAt(0)+"");
-            } catch (StringIndexOutOfBoundsException e) {
-            	kiwiSaver = EmployeeDetails.KiwiSaver.ZERO;
-            } catch (DetailParseException e) {
-            	kiwiSaver = EmployeeDetails.KiwiSaver.ZERO;
-            }
         }
+    
 
         String payRate = eTPayRate.getText().toString();
         
