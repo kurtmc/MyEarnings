@@ -39,6 +39,42 @@
                     android:text="@string/pay_period"
                     android:id="@+id/textView4" android:layout_gravity="left|center_vertical"
                     />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ToggleButton
+                    android:id="@+id/tbWeekly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/weekly"
+                    android:textOff="@string/weekly" />
+
+                <ToggleButton
+                    android:id="@+id/tbFortnightly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/fortnightly"
+                    android:textOff="@string/fortnightly" />
+                
+                <ToggleButton
+                    android:id="@+id/tbMonthly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/monthly"
+                    android:textOff="@string/monthly" />
+                
+                <ImageButton 
+                    android:id="@+id/bHelpPayPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:contentDescription="@string/help"/>
+
+            </LinearLayout>
+
             <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -59,6 +95,33 @@
                     android:text="@string/tax_code"
                     android:id="@+id/textView2" android:layout_gravity="left|center_vertical" android:layout_weight="0.09"
                     />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ToggleButton
+                    android:id="@+id/tbTaxCodeM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/m"
+                    android:textOff="@string/m" />
+
+                <ToggleButton
+                    android:id="@+id/tbTaxCodeME"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/me"
+                    android:textOff="@string/me" />
+                
+                <ImageButton 
+                    android:id="@+id/bHelpTaxCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:contentDescription="@string/help"/>
+
+            </LinearLayout>
             <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:layout_gravity="left|center_vertical"
@@ -84,6 +147,24 @@
                     android:layout_height="wrap_content"
                     android:text="@string/kiwi_saver"
                     android:id="@+id/textView3" />
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            <NumberPicker 
+                android:id="@+id/npKiwiSaver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <ImageButton 
+                    android:id="@+id/bHelpKiwiSaver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:contentDescription="@string/help"/>
+            </LinearLayout>
+            
+            
             <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:layout_gravity="left|center_vertical"
@@ -112,6 +193,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/student_loan" />
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <ToggleButton
+                    android:id="@+id/tbStudentLoan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/yes"
+                    android:textOff="@string/no" />
+                
+                <ImageButton 
+                    android:id="@+id/bHelpStudentLoan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:contentDescription="@string/help"/>
+                
+             </LinearLayout>
 
             <CheckBox
                     android:layout_width="wrap_content"

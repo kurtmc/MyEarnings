@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 
@@ -35,6 +36,8 @@ public class PreferencesUI {
 
 	private SeekBar sBKiwiSaver;
 	private RadioButton rBVarKiwiSaver;
+	
+	private NumberPicker npKiwiSaver;
 	
     private Activity _activity;
     
@@ -65,6 +68,10 @@ public class PreferencesUI {
 
         sBKiwiSaver = (SeekBar)_activity.findViewById(R.id.seekBarKiwiSaver);
         rBVarKiwiSaver = (RadioButton)_activity.findViewById(R.id.radioButtonVaribaleKS);
+        
+        npKiwiSaver = (NumberPicker)_activity.findViewById(R.id.npKiwiSaver);
+        npKiwiSaver.setMaxValue(8);
+        npKiwiSaver.setMinValue(0);
         
         bSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
