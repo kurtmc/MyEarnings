@@ -33,5 +33,9 @@
     <string name="help">Help</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="advanced_on">Advanced ON</string>
+    <string name="advanced_off">Advanced OFF</string>
+    <string name="time_and_a_half">Time and a half</string>
+    <string name="double_time">Double time</string>
 
 </resources>
