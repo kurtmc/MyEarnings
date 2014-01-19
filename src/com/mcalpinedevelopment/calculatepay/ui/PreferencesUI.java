@@ -222,6 +222,8 @@ public class PreferencesUI {
         	tbTaxCodeME.setChecked(true);
         }
         npKiwiSaver.setValue((int)dM.get_kiwiSaver().getValue());
+        
+        eTPayRate.setText(String.valueOf(dM.get_hourlyPay()));
     }
     
     /**
