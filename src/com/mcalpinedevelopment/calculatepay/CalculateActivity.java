@@ -1,14 +1,26 @@
 package com.mcalpinedevelopment.calculatepay;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,6 +40,8 @@ public class CalculateActivity extends Activity{
     TextView tvDataToDisplay2;
     TextView tvDataToDisplay3;
     TextView tvDataToDisplay4;
+    
+    PieChart mCustomDrawableView;
 
     //Code inside of this method is executed when it is instantiated
     @SuppressLint("NewApi")
@@ -74,10 +88,13 @@ public class CalculateActivity extends Activity{
         // the attribute android:id="@+id/mainLayout"
         LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayoutAd);
         // Add the adView to it
-        layout.addView(adView);
+        //layout.addView(adView);
         // Initiate a generic request to load it with an ad
-        adView.loadAd(new AdRequest());
+        //adView.loadAd(new AdRequest());
         // === ADVERTISEMENT =======================================================*/
+        
+        mCustomDrawableView = new PieChart(this);
+        layout.addView(mCustomDrawableView);
     }
     
 
@@ -114,6 +131,54 @@ public class CalculateActivity extends Activity{
     private void startAboutActivity() {
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
+    }
+    
+    public class PieChart extends View {
+
+        public PieChart(Context context) {
+	        super(context);	        
+        }
+
+        protected void onDraw(Canvas canvas) {
+        	List<Integer> colours = new ArrayList<Integer>();
+        	colours.add(Color.BLUE);
+        	colours.add(Color.GREEN);
+        	colours.add(Color.RED);
+        	colours.add(Color.MAGENTA);
+        	colours.add(Color.YELLOW);
+        	
+        	
+        	Pie p = new Pie(500);
+        	Paint wallpaint;
+        	Path wallpath;
+        	List<int[]> points;
+     
+    		wallpaint = new Paint();
+        	wallpaint.setColor(colours.get(0));
+        	wallpaint.setStyle(Style.FILL);
+
+        	wallpath = new Path();
+        	wallpath.reset();
+
+        	points = p.slice(100/5);
+        	wallpath.moveTo(points.get(0)[0], points.get(0)[1]);
+        	wallpath.lineTo(points.get(1)[0], points.get(1)[1]);
+        	wallpath.lineTo(points.get(2)[0], points.get(2)[1]);
+        	wallpath.lineTo(points.get(3)[0], points.get(3)[1]);
+
+        	
+
+        	canvas.drawPath(wallpath, wallpaint);        		
+        	
+        	
+        	
+        	
+        	
+
+        	
+        	
+        }
+       
     }
     
 }

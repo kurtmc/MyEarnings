@@ -51,6 +51,9 @@
             android:name="com.mcalpinedevelopment.calculatepay.AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        
+		<uses-library android:name="android.test.runner" />
     </application>
-
+        <instrumentation android:name="android.test.InstrumentationTestRunner"
+       android:targetPackage="com.mcalpinedevelopment.calculatepay" android:label="Tests for My Earnings" />
 </manifest>
