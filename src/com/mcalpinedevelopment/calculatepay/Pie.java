@@ -37,8 +37,14 @@ public class Pie {
 		points.add(centre()); //Centre first
 		points.add(new int[] {_lastX, _lastY}); //Top next
 		
+		double divisions = 10;
+		for (int i = 0; i < toInt(divisions); i++) {
+			_angle += 2*Math.PI*(percentage/100)/divisions;
+			points.add(new int[] {toInt(x(_angle, _radius, _radius)), toInt(y(_angle, _radius, _radius))});
+		}
+		
 
-		_angle += 2*Math.PI*(percentage/100);
+//		_angle += 2*Math.PI*(percentage/100);
 		_lastX = toInt(x(_angle, _radius, _radius));
 		_lastY = toInt(y(_angle, _radius, _radius));
 		points.add(new int[] {_lastX, _lastY});

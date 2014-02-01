@@ -153,23 +153,22 @@ public class CalculateActivity extends Activity{
         	Path wallpath;
         	List<int[]> points;
      
-    		wallpaint = new Paint();
-        	wallpaint.setColor(colours.get(0));
-        	wallpaint.setStyle(Style.FILL);
-
-        	wallpath = new Path();
-        	wallpath.reset();
-
-        	points = p.slice(100/5);
-        	wallpath.moveTo(points.get(0)[0], points.get(0)[1]);
-        	wallpath.lineTo(points.get(1)[0], points.get(1)[1]);
-        	wallpath.lineTo(points.get(2)[0], points.get(2)[1]);
-        	wallpath.lineTo(points.get(3)[0], points.get(3)[1]);
-
-        	
-
-        	canvas.drawPath(wallpath, wallpaint);        		
-        	
+        	for (int i = 0; i < 5; i++) {
+	    		wallpaint = new Paint();
+	        	wallpaint.setColor(colours.get(i));
+	        	wallpaint.setStyle(Style.FILL);
+	
+	        	wallpath = new Path();
+	        	wallpath.reset();
+	
+	        	points = p.slice(100/5);
+	        	wallpath.moveTo(points.get(0)[0], points.get(0)[1]);
+	        	for (int j = 1; j < points.size(); j++) {
+	        		wallpath.lineTo(points.get(j)[0], points.get(j)[1]);
+	        	}      	
+	
+	        	canvas.drawPath(wallpath, wallpaint);        		
+        	}
         	
         	
         	
