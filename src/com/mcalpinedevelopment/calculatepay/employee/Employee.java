@@ -41,4 +41,26 @@ public class Employee {
 	public String nett() {		
 		return _context.getString(R.string.nett) + String.format("%.2f",_taxCalculator.get_nett());		
 	}
+	
+	public double grossDouble() {		
+		return _taxCalculator.get_grossIncome();
+	}
+	
+	public double payeDouble() {
+		return _taxCalculator.get_paye();
+	}
+	
+	public double studentLoanDouble() {		
+		return _taxCalculator.get_studentLoan();		
+	}
+	
+	public double kiwiSaverDouble() {
+		return _taxCalculator.get_kiwiSaver();		
+	}
+	
+	public double nettDouble() {		
+		return _taxCalculator.get_nett();		
+	}
+	
+	
 }

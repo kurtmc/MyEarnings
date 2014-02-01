@@ -2,6 +2,7 @@ package com.mcalpinedevelopment.calculatepay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -42,13 +43,17 @@ public class CalculateActivity extends Activity{
     TextView tvDataToDisplay4;
     
     PieChart mCustomDrawableView;
+	private String _hoursWorked;
+	
+	private Context _this;
 
     //Code inside of this method is executed when it is instantiated
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        
+        _this = this;
 
 
         // Make sure we're running on Honeycomb or higher to use ActionBar APIs
@@ -69,10 +74,10 @@ public class CalculateActivity extends Activity{
         
         // Get the message from the intent
         Intent intent = getIntent();
-        String hoursWorked = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        _hoursWorked = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         
         // Instantiate Employee object
-        Employee employee = new Employee(hoursWorked, this);
+        Employee employee = new Employee(_hoursWorked, this);
         
         tvDataToDisplay0.setText(employee.gross());
         tvDataToDisplay1.setText(employee.paye());
@@ -140,6 +145,18 @@ public class CalculateActivity extends Activity{
         }
 
         protected void onDraw(Canvas canvas) {
+        	List<Double> numbers = new ArrayList<Double>();
+        	
+        	Employee employee = new Employee(_hoursWorked, _this);
+        	//numbers.add(Double.parseDouble(employee.gross()));
+     
+        	
+        	numbers.add(employee.payeDouble());
+        	numbers.add(employee.studentLoanDouble());
+        	numbers.add(employee.kiwiSaverDouble());
+        	numbers.add(employee.nettDouble());
+        	double total = employee.grossDouble();
+        	
         	List<Integer> colours = new ArrayList<Integer>();
         	colours.add(Color.BLUE);
         	colours.add(Color.GREEN);
@@ -153,7 +170,7 @@ public class CalculateActivity extends Activity{
         	Path wallpath;
         	List<int[]> points;
      
-        	for (int i = 0; i < 5; i++) {
+        	for (int i = 0; i < 4; i++) {
 	    		wallpaint = new Paint();
 	        	wallpaint.setColor(colours.get(i));
 	        	wallpaint.setStyle(Style.FILL);
@@ -161,7 +178,7 @@ public class CalculateActivity extends Activity{
 	        	wallpath = new Path();
 	        	wallpath.reset();
 	
-	        	points = p.slice(100/5);
+	        	points = p.slice(100*numbers.get(i)/total);
 	        	wallpath.moveTo(points.get(0)[0], points.get(0)[1]);
 	        	for (int j = 1; j < points.size(); j++) {
 	        		wallpath.lineTo(points.get(j)[0], points.get(j)[1]);
