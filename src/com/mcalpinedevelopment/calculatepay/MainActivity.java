@@ -3,12 +3,16 @@ package com.mcalpinedevelopment.calculatepay;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
 
@@ -17,6 +21,9 @@ public class MainActivity extends Activity {
     //Declare fields for the GUI
     Button bCalculate;
     EditText eTHoursWorked;
+    private ToggleButton tbAdvanced;
+    private EditText etTimeAndAHalf;
+    private EditText etDoubleTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,10 @@ public class MainActivity extends Activity {
         //Initialise fields, accessing GUI components
         bCalculate = (Button)findViewById(R.id.buttonCalculate);
         eTHoursWorked = (EditText)findViewById(R.id.editTextHoursWorked);
+        tbAdvanced = (ToggleButton)findViewById(R.id.tbAdvanced);
+        etTimeAndAHalf = (EditText)findViewById(R.id.etTimeAndAHalf);
+        etDoubleTime = (EditText)findViewById(R.id.etDoubleTime);
+        
 
         //Set on click listener for bCalculate, and only execute if something is typed in the EditText eTHoursWorked
         bCalculate.setOnClickListener(new View.OnClickListener() {
@@ -39,10 +50,25 @@ public class MainActivity extends Activity {
 
 
         });
+        
+        tbAdvanced.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					etTimeAndAHalf.setVisibility(View.VISIBLE);
+					etDoubleTime.setVisibility(View.VISIBLE);
+				} else {
+					etTimeAndAHalf.setVisibility(View.GONE);
+					etDoubleTime.setVisibility(View.GONE);
+				}
+				
+			}});
 
 
 
         // Enter on the EditText eTHoursWorked will start CalculateActivity
+        // Need to sort this out
         eTHoursWorked.setOnKeyListener(new View.OnKeyListener()
         {
             public boolean onKey(View v, int keyCode, KeyEvent event)
@@ -53,7 +79,9 @@ public class MainActivity extends Activity {
                     {
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-                            sendMessageToCalculate(v);
+                        	if (!tbAdvanced.isChecked()) {
+                        		sendMessageToCalculate(v);
+                        	}                            
                             return true;
                         default:
                             break;
@@ -75,7 +103,14 @@ public class MainActivity extends Activity {
      * Takes the string for eTHoursWorked and sends it to CalculateActivity */
     public void sendMessageToCalculate(View view) {
         Intent intent = new Intent(this, CalculateActivity.class);
-        String message = eTHoursWorked.getText().toString();
+        double hoursWorked = Double.parseDouble(eTHoursWorked.getText().toString());
+        if (tbAdvanced.isChecked()) {
+        	String timeAndAHalf = etTimeAndAHalf.getText().toString();
+        	String doubleTime = etDoubleTime.getText().toString();
+        	hoursWorked += 1.5*Double.parseDouble(timeAndAHalf.equals("") ? "0.0" : timeAndAHalf);
+            hoursWorked += 2.0*Double.parseDouble(doubleTime.equals("") ? "0.0" : doubleTime);
+        }        
+        String message = String.valueOf(hoursWorked);
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
