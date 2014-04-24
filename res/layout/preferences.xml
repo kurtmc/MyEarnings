@@ -39,19 +39,53 @@
                     android:text="@string/pay_period"
                     android:id="@+id/textView4" android:layout_gravity="left|center_vertical"
                     />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ToggleButton
+                    android:id="@+id/tbWeekly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/weekly"
+                    android:textOff="@string/weekly" />
+
+                <ToggleButton
+                    android:id="@+id/tbFortnightly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/fortnightly"
+                    android:textOff="@string/fortnightly" />
+                
+                <ToggleButton
+                    android:id="@+id/tbMonthly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/monthly"
+                    android:textOff="@string/monthly" />
+
+				<RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+
+	                <ImageButton
+	                    android:id="@+id/bHelpPayPeriod"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:contentDescription="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:text="@string/help" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
             <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/weekly"
-                        android:id="@+id/radioButtonWeekly" android:checked="false" android:layout_gravity="left|center_vertical"/>
-                <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fortnightly"
-                        android:id="@+id/radioButtonFortnightly" android:layout_gravity="left|center_vertical" android:checked="false"/>
             </RadioGroup>
             <TextView
                     android:layout_width="wrap_content"
@@ -59,77 +93,137 @@
                     android:text="@string/tax_code"
                     android:id="@+id/textView2" android:layout_gravity="left|center_vertical" android:layout_weight="0.09"
                     />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ToggleButton
+                    android:id="@+id/tbTaxCodeM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/m"
+                    android:textOff="@string/m" />
+
+                <ToggleButton
+                    android:id="@+id/tbTaxCodeME"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/me"
+                    android:textOff="@string/me" />
+                <RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+
+	                <ImageButton
+	                    android:id="@+id/bHelpTaxCode"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:contentDescription="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:text="@string/help" />
+
+	            </RelativeLayout>
+
+            </LinearLayout>
             <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:layout_gravity="left|center_vertical"
                     >
-                <RadioButton
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/m"
-                        android:id="@+id/radioButtonM" android:checked="false"/>
-                <RadioButton
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/me"
-                        android:id="@+id/radioButtonME" android:checked="false"/>
-                <RadioButton
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ml"
-                        android:id="@+id/radioButtonML" android:checked="false"/>
             </RadioGroup>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kiwi_saver"
                     android:id="@+id/textView3" />
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            <NumberPicker 
+                android:id="@+id/npKiwiSaver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+	            <ImageButton 
+	                    android:id="@+id/bHelpKiwiSaver"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:text="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:contentDescription="@string/help"/>
+	        </RelativeLayout>
+            </LinearLayout>
+            
+            
             <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:layout_gravity="left|center_vertical"
                     >
-                <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/none"
-                        android:id="@+id/radioButtonKSNone" android:checked="false"/>
-
-                <RadioButton
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/radioButtonVaribaleKS"
-                        android:checked="false"/>
             </RadioGroup>
-
-            <SeekBar
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/seekBarKiwiSaver"
-                    android:layout_gravity="left|center_vertical"/>
 
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/student_loan" />
-
-            <CheckBox
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <ToggleButton
+                    android:id="@+id/tbStudentLoan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sl"
-                    android:id="@+id/checkBoxSL" android:layout_gravity="left|center_vertical" android:checked="false"
-                    />
+                    android:textOn="@string/yes"
+                    android:textOff="@string/no" />
+                <RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+	                <ImageButton 
+	                    android:id="@+id/bHelpStudentLoan"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:text="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:contentDescription="@string/help"/>
+	            </RelativeLayout>
+                
+             </LinearLayout>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pay_rate"
                     android:id="@+id/textView5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
             <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:ems="10"
                     android:id="@+id/editTextPayRate" android:layout_gravity="fill_horizontal|left" />
+            	<RelativeLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="match_parent" >
+	                <ImageButton 
+	                    android:id="@+id/bHelpPayRate"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentRight="true"
+	                    android:layout_alignParentTop="true"
+	                    android:text="@string/help"
+	                    android:src="@android:drawable/ic_dialog_info"
+	                    android:contentDescription="@string/help"/>
+	            </RelativeLayout>
+            </LinearLayout>
 
             <Button
                     android:layout_width="fill_parent"

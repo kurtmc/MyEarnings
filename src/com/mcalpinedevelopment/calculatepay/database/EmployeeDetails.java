@@ -2,6 +2,8 @@ package com.mcalpinedevelopment.calculatepay.database;
 
 import java.util.Locale;
 
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails.KiwiSaver;
+
 public class EmployeeDetails {
 	public enum PayPeriod {
 		WEEKLY, FORTNIGHTLY, MONTHLY;
@@ -89,5 +91,28 @@ public class EmployeeDetails {
 		throw new DetailParseException("Error parsing student loan");
 		
 		
+	}
+
+	public static KiwiSaver parseKiwiSaver(int value) throws DetailParseException {
+		if (value == 0) {
+			return KiwiSaver.ZERO;
+		} else if (value == 1) {
+			return KiwiSaver.ONE;
+		} else if (value == 2) {
+			return KiwiSaver.TWO;
+		} else if (value == 3) {
+			return KiwiSaver.THREE;
+		} else if (value == 4) {
+			return KiwiSaver.FOUR;
+		} else if (value == 5) {
+			return KiwiSaver.FIVE;
+		} else if (value == 6) {
+			return KiwiSaver.SIX;
+		} else if (value == 7) {
+			return KiwiSaver.SEVEN;
+		} else if (value == 8) {
+			return KiwiSaver.EIGHT;
+		}		
+		throw new DetailParseException("Error parsing Kiwi Saver");
 	}
 }

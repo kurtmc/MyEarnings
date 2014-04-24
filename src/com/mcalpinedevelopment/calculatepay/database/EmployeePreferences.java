@@ -73,7 +73,7 @@ public class EmployeePreferences {
 	 */
 	public static EmployeePreferences defaultValue() {
 		EmployeePreferences dM = new EmployeePreferences();
-    	dM.set_name("Enter name");
+    	dM.set_name("");
     	dM.set_payPeriod(EmployeeDetails.PayPeriod.WEEKLY);
     	dM.set_taxCode(EmployeeDetails.TaxCode.M);
     	dM.set_kiwiSaver(EmployeeDetails.KiwiSaver.ZERO);

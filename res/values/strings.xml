@@ -30,5 +30,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="about">About</string>
     <string name="student_loan">Do you have a student loan?</string>
+    <string name="help">Help</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>
