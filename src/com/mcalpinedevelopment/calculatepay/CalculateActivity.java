@@ -2,11 +2,9 @@ package com.mcalpinedevelopment.calculatepay;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -14,8 +12,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -25,7 +21,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.ads.*;
+
 import com.mcalpinedevelopment.calculatepay.employee.Employee;
 
 
@@ -33,7 +29,6 @@ import com.mcalpinedevelopment.calculatepay.employee.Employee;
  * Created by kurt on 17/05/13.
  */
 public class CalculateActivity extends Activity{
-    private AdView adView;
     final private String MY_AD_UNIT_ID = "a151adb2d8447b7";
 
     TextView tvDataToDisplay0;
