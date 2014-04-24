@@ -3,19 +3,15 @@ package com.mcalpinedevelopment.calculatepay.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mcalpinedevelopment.calculatepay.MainActivity;
-import com.mcalpinedevelopment.calculatepay.R;
-import com.mcalpinedevelopment.calculatepay.database.DetailParseException;
-import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
-import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
-import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -23,6 +19,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.ToggleButton;
+
+import com.mcalpinedevelopment.calculatepay.MainActivity;
+import com.mcalpinedevelopment.calculatepay.R;
+import com.mcalpinedevelopment.calculatepay.database.DetailParseException;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDatabase;
+import com.mcalpinedevelopment.calculatepay.database.EmployeeDetails;
+import com.mcalpinedevelopment.calculatepay.database.EmployeePreferences;
 
 public class PreferencesUI {	
 	
@@ -165,6 +168,13 @@ public class PreferencesUI {
     	tbFortnightly = (ToggleButton)_activity.findViewById(R.id.tbFortnightly);
     	tbMonthly = (ToggleButton)_activity.findViewById(R.id.tbMonthly);
     	ibPayPeriodHelp = (ImageButton)_activity.findViewById(R.id.bHelpPayPeriod);
+    	ibPayPeriodHelp.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showInformation(R.string.pay_period_title, R.string.pay_period_description);				
+			}
+		});
     	
     	// Manage pay period list
     	_listOfPayPeriodButtons = new ArrayList<ToggleButton>();
@@ -176,6 +186,13 @@ public class PreferencesUI {
     	tbTaxCodeM = (ToggleButton)_activity.findViewById(R.id.tbTaxCodeM);
     	tbTaxCodeME = (ToggleButton)_activity.findViewById(R.id.tbTaxCodeME);
     	ibTaxCodeHelp = (ImageButton)_activity.findViewById(R.id.bHelpTaxCode);
+    	ibTaxCodeHelp.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
     	
     	_listOfTaxCodeButtons = new ArrayList<ToggleButton>();
     	_listOfTaxCodeButtons.add(tbTaxCodeM);
@@ -187,14 +204,35 @@ public class PreferencesUI {
     	// Kiwi Saver widgets
     	npKiwiSaver = (NumberPicker)_activity.findViewById(R.id.npKiwiSaver);
     	ibKiwiSaverHelp = (ImageButton)_activity.findViewById(R.id.bHelpKiwiSaver);
+    	ibKiwiSaverHelp.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
     	
     	//Student Loan buttons
     	tbStudentLoan = (ToggleButton)_activity.findViewById(R.id.tbStudentLoan);
     	ibStudentLoanHelp = (ImageButton)_activity.findViewById(R.id.bHelpStudentLoan);
+    	ibStudentLoanHelp.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
     	
     	// Pay rate widgets
     	eTPayRate = (EditText)_activity.findViewById(R.id.editTextPayRate);
     	ibPayRateHelp = (ImageButton)_activity.findViewById(R.id.bHelpPayRate);
+    	ibPayRateHelp.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
     	
     	// Save button
     	bSave = (Button)_activity.findViewById(R.id.buttonSave);
@@ -293,5 +331,21 @@ public class PreferencesUI {
     public void goBackToMainView(View view) {
         Intent intent = new Intent(_activity, MainActivity.class);
         _activity.startActivity(intent);
+    }
+    
+    private void showInformation(int titleString, int informationString) {
+    	AlertDialog.Builder builder1 = new AlertDialog.Builder(_activity);
+    	builder1.setTitle(_activity.getResources().getString(titleString));
+    	builder1.setMessage(_activity.getResources().getString(informationString));
+    	builder1.setCancelable(true);
+    	builder1.setNeutralButton(android.R.string.ok,
+    	        new DialogInterface.OnClickListener() {
+    	    public void onClick(DialogInterface dialog, int id) {
+    	        dialog.cancel();
+    	    }
+    	});
+
+    	AlertDialog alert11 = builder1.create();
+    	alert11.show();
     }
 }
