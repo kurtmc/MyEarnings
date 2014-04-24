@@ -46,9 +46,12 @@ public class TaxCalculator {
         if (_payperiod.equals(EmployeeDetails.PayPeriod.WEEKLY)) {
             is = _context.getResources().openRawResource(R.raw.weeklypaye);
             readFactor = 1;
-        } else {
+        } else if (_payperiod.equals(EmployeeDetails.PayPeriod.FORTNIGHTLY)) {
             is = _context.getResources().openRawResource(R.raw.fortnightlypaye);
             readFactor = 2;
+        } else {
+        	is = _context.getResources().openRawResource(R.raw.monthlypaye);
+            readFactor = 5;
         }
 
         String line = "";
