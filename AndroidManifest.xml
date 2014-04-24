@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mcalpinedevelopment.calculatepay"
-    android:versionCode="18"
-    android:versionName="2.0.3" >
+    android:versionCode="19"
+    android:versionName="2.1.0" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -51,6 +51,9 @@
             android:name="com.mcalpinedevelopment.calculatepay.AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        
+		<uses-library android:name="android.test.runner" />
     </application>
-
+        <instrumentation android:name="android.test.InstrumentationTestRunner"
+       android:targetPackage="com.mcalpinedevelopment.calculatepay" android:label="Tests for My Earnings" />
 </manifest>
