@@ -66,18 +66,6 @@ public class CalculateActivity extends Activity{
         tvDataToDisplay3.setText(employee.kiwiSaver());
         tvDataToDisplay4.setText(employee.nett());
 
-        
-        // === ADVERTISEMENT ========================================================
-        // Create the adView
-        adView = new AdView(this, AdSize.BANNER, MY_AD_UNIT_ID);
-        // Lookup your LinearLayout assuming it's been given
-        // the attribute android:id="@+id/mainLayout"
-        LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayoutAd);
-        // Add the adView to it
-        layout.addView(adView);
-        // Initiate a generic request to load it with an ad
-        adView.loadAd(new AdRequest());
-        // === ADVERTISEMENT =======================================================*/
     }
     
 
