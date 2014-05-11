@@ -18,9 +18,9 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 import com.mcalpinedevelopment.calculatepay.employee.Employee;
 
@@ -29,7 +29,6 @@ import com.mcalpinedevelopment.calculatepay.employee.Employee;
  * Created by kurt on 17/05/13.
  */
 public class CalculateActivity extends Activity{
-    final private String MY_AD_UNIT_ID = "a151adb2d8447b7";
 
     TextView tvDataToDisplay0;
     TextView tvDataToDisplay1;
@@ -80,11 +79,17 @@ public class CalculateActivity extends Activity{
         tvDataToDisplay3.setText(employee.kiwiSaver());
         tvDataToDisplay4.setText(employee.nett());
 
-        LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayoutAd);
-
+        LinearLayout pieView = (LinearLayout)findViewById(R.id.pie_chart);
+        
         
         mCustomDrawableView = new PieChart(this);
-        layout.addView(mCustomDrawableView);
+        
+        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(500, 500);
+     
+        
+        mCustomDrawableView.setLayoutParams(lp);
+        pieView.addView(mCustomDrawableView);
+
     }
     
 
@@ -143,11 +148,11 @@ public class CalculateActivity extends Activity{
         	double total = employee.grossDouble();
         	
         	List<Integer> colours = new ArrayList<Integer>();
-        	colours.add(Color.BLUE);
-        	colours.add(Color.GREEN);
-        	colours.add(Color.RED);
-        	colours.add(Color.MAGENTA);
-        	colours.add(Color.YELLOW);
+        	colours.add(Color.parseColor("#7A08AB"));
+        	colours.add(Color.parseColor("#5B0DAD"));
+        	colours.add(Color.parseColor("#1049AA"));
+        	colours.add(Color.parseColor("#057EA0"));
+        	colours.add(Color.parseColor("#48DD00"));
         	
         	
         	Pie p = new Pie(500);
