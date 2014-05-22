@@ -43,12 +43,16 @@
     <string name="pay_period_description">Select "Weekly" if you are paid every 7 days.
     Select "Fortnigtly" if you are paid every 14 days (2 weeks).
     Select "Monthly" if you paid on the same day every month, i.e. you are paid on the 15th of every month.</string>
+    
     <string name="tax_code_title"></string>
 	<string name="tax_code_description"></string>
+	
     <string name="kiwi_saver_title"></string>
 	<string name="kiwi_saver_description"></string>
+	
     <string name="student_loan_title"></string>
 	<string name="student_loan_description"></string>
+	
 	<string name="pay_rate_title"></string>
 	<string name="pay_rate_description"></string>
 	

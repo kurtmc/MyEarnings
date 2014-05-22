@@ -171,7 +171,6 @@ public class PreferencesUI {
     	ibPayPeriodHelp.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				showInformation(R.string.pay_period_title, R.string.pay_period_description);				
 			}
 		});
@@ -189,8 +188,7 @@ public class PreferencesUI {
     	ibTaxCodeHelp.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				showInformation(R.string.tax_code_title, R.string.tax_code_description);
 			}
 		});
     	
@@ -207,8 +205,7 @@ public class PreferencesUI {
     	ibKiwiSaverHelp.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				showInformation(R.string.kiwi_saver_title, R.string.kiwi_saver_description);
 			}
 		});
     	
@@ -218,8 +215,7 @@ public class PreferencesUI {
     	ibStudentLoanHelp.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				showInformation(R.string.student_loan_title, R.string.student_loan_description);
 			}
 		});
     	
@@ -229,8 +225,7 @@ public class PreferencesUI {
     	ibPayRateHelp.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				showInformation(R.string.pay_rate_title, R.string.pay_rate_description);
 			}
 		});
     	

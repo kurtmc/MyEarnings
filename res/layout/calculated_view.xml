@@ -9,27 +9,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dataToDisplay0" android:layout_gravity="left|center_vertical"
-            android:textSize="28dp"/>
+            android:textSize="28sp"
+            android:paddingLeft="10dp"/>
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/dataToDisplay1"
               android:layout_gravity="left|center_vertical"
-              android:textSize="28dp"/>
+              android:textSize="28sp"
+              android:paddingLeft="10dp"/>
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/dataToDisplay2"
               android:layout_gravity="left|center_vertical"
-              android:textSize="28dp"/>
+              android:textSize="28sp"
+              android:paddingLeft="10dp"/>
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/dataToDisplay3"
               android:layout_gravity="left|center_vertical"
-              android:textSize="28dp"/>
+              android:textSize="28sp"
+              android:paddingLeft="10dp"/>
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/dataToDisplay4"
               android:layout_gravity="left|center_vertical"
-              android:textSize="28dp"/>
-   <LinearLayout android:orientation="vertical"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/linearLayoutAd"
-                  android:layout_gravity="bottom"
-                  android:gravity="bottom">
+              android:textSize="28sp"
+              android:paddingLeft="10dp"/>
+   <LinearLayout
+   	    android:id="@+id/pie_chart"
+   	    android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:gravity="center"
+   	    android:paddingTop="10dp" >
 
-    </LinearLayout>
+
+   	</LinearLayout>
 
 
 </LinearLayout>
